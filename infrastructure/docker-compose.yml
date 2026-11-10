@@ -1,1 +1,48 @@
+services:
+  # 1. Database PostgreSQL
+  postgres:
+    image: postgres:16-alpine
+    container_name: livingdocs_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: living_admin
+      POSTGRES_PASSWORD: living_password_2026
+      POSTGRES_DB: livingdocs_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
+  # 2. Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: livingdocs_redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  # 3. Apache Kafka (Message Broker)
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: livingdocs_zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: livingdocs_kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+volumes:
+  postgres_data:
