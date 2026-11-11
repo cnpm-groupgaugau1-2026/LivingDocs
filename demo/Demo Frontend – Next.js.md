@@ -1,6 +1,7 @@
 # Demo Frontend – Next\.js
 
 **1.Khởi chạy Server Dev của Next.js**
+![Demo Frontend](../docs/images/anh-1.png)
 
 **2.Truy cập ứng dụng:**
 
