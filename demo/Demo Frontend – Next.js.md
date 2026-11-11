@@ -15,5 +15,7 @@ Mở trình duyệt web và truy cập địa chỉ:
 ![Demo Frontend](../docs/images/anh-2.png)
 
 \*Checkpoint 2 : Thử nghiệm Markdown Editor & Typography
+![Demo Frontend](../docs/images/anh-3.png)
+![Demo Frontend](../docs/images/anh-4.png)
 
 Checkpoint 3: Kiểm tra Console & Network Browser
