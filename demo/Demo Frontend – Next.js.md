@@ -19,3 +19,5 @@ Mở trình duyệt web và truy cập địa chỉ:
 ![Demo Frontend](../docs/images/anh-4.png)
 
 Checkpoint 3: Kiểm tra Console & Network Browser
+![Demo Frontend](../docs/images/anh-5.png)
+![Demo Frontend](../docs/images/anh-6.png)
