@@ -6,7 +6,10 @@ from app.core.security import get_password_hash, create_access_token, verify_pas
 from app.core.rbac import get_current_user, RequireRole
 from app.models.user import User, Role
 from pydantic import BaseModel, EmailStr
+from app.db.session import engine
+from app.db.base import Base  # hoặc từ file chứa Base metadata của bạn
 
+Base.metadata.create_all(bind=engine)
 # Tự động khởi tạo bảng 'users' trong PostgreSQL khi server khởi động
 Base.metadata.create_all(bind=engine)
 
