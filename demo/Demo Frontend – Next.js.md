@@ -4,6 +4,7 @@
 ![Demo Frontend](../docs/images/anh-1.png)
 
 **2.Truy cập ứng dụng:**
+![Demo Frontend](../docs/images/anh-2.png)
 
 Trình duyệt web.
 
