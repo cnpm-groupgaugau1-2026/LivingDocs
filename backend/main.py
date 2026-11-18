@@ -21,6 +21,8 @@ from app.core.rbac import get_current_user, RequireRole
 from app.models.user import User, Role
 from app.models.integration_config import IntegrationConfig  # noqa: F401
 from app.models.ai_engine_config import AiEngineConfig  # noqa: F401
+from app.models.template import DocTemplate, DocTemplateVersion  # noqa: F401
+from app.api.v1.templates import router as templates_router
 
 from app.api.v1.admin_users import router as admin_users_router
 from app.api.v1.admin_integrations import router as admin_integrations_router
@@ -311,7 +313,7 @@ app.include_router(
     admin_ai_config_router,
     dependencies=[Depends(RequireRole([Role.ADMINISTRATOR]))],
 )
-
+app.include_router(templates_router)
 
 # ==============================================================================
 # --- 1.1 & 1.2 GITHUB WORKSPACE MANAGEMENT & REPOSITORY SYNCHRONIZATION ---
