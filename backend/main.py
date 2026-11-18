@@ -19,6 +19,12 @@ from app.core.database import engine, Base, get_db
 from app.core.security import get_password_hash, create_access_token, verify_password
 from app.core.rbac import get_current_user, RequireRole
 from app.models.user import User, Role
+from app.models.integration_config import IntegrationConfig  # noqa: F401
+from app.models.ai_engine_config import AiEngineConfig  # noqa: F401
+
+from app.api.v1.admin_users import router as admin_users_router
+from app.api.v1.admin_integrations import router as admin_integrations_router
+from app.api.v1.admin_ai_config import router as admin_ai_config_router
 
 
 # ==============================================================================
@@ -54,7 +60,7 @@ class WebhookEventLog(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
 
 
-# Tự động khởi tạo toàn bộ bảng trong PostgreSQL khi server khởi động
+# Tự động khởi tạo toàn bộ bảng (bao gồm bảng của FE13) trong PostgreSQL khi server khởi động
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
@@ -289,22 +295,22 @@ def tech_lead_dashboard():
     return {"message": "Xem báo cáo sức khỏe tài liệu & Quản lý Template (Dành cho Tech Lead)"}
 
 
-@app.get(
-    "/api/v1/admin/users",
-    tags=["rbac"],
+# ==============================================================================
+# --- FE13: SYSTEM ADMINISTRATION & AI ENGINE CONFIGURATION (2.1, 2.2, 2.3) ---
+# ==============================================================================
+
+app.include_router(
+    admin_users_router,
     dependencies=[Depends(RequireRole([Role.ADMINISTRATOR]))],
 )
-def admin_get_users(db: Session = Depends(get_db)):
-    users = db.query(User).all()
-    return [
-        {
-            "id": u.id,
-            "email": u.email,
-            "role": u.role,
-            "full_name": getattr(u, "full_name", u.email),
-        }
-        for u in users
-    ]
+app.include_router(
+    admin_integrations_router,
+    dependencies=[Depends(RequireRole([Role.ADMINISTRATOR]))],
+)
+app.include_router(
+    admin_ai_config_router,
+    dependencies=[Depends(RequireRole([Role.ADMINISTRATOR]))],
+)
 
 
 # ==============================================================================
@@ -871,6 +877,9 @@ async def simulate_github_webhook_push(
     }
 
     async with httpx.AsyncClient(timeout=15.0) as client:
+        repo_res = await client.get(f"https://api.github.com/repos/{repo_clean}", headers=headers)
+        default_branch = repo_res.json().get("default_branch", "main") if repo_res.status_code == 200 else "main"
+
         commits_res = await client.get(
             f"https://api.github.com/repos/{repo_clean}/commits?per_page=1",
             headers=headers,
@@ -880,40 +889,43 @@ async def simulate_github_webhook_push(
 
         latest_commit = commits_res.json()[0]
         commit_sha = latest_commit.get("sha", "")
-        pusher = latest_commit.get("commit", {}).get("author", {}).get("name", user.email)
+        pusher = (
+            latest_commit.get("commit", {}).get("author", {}).get("name")
+            or latest_commit.get("author", {}).get("login")
+            or "github-simulate"
+        )
 
         detail_res = await client.get(
             f"https://api.github.com/repos/{repo_clean}/commits/{commit_sha}",
             headers=headers,
         )
         files = detail_res.json().get("files", []) if detail_res.status_code == 200 else []
-        md_paths = [f["filename"] for f in files if f.get("filename", "").lower().endswith(".md")]
 
-        if not md_paths:
-            existing = db.query(Document).filter(Document.repo_full_name == repo_clean).all()
-            md_paths = [d.file_path for d in existing[:3]] or ["README.md"]
+        changed_md = [
+            f["filename"]
+            for f in files
+            if f.get("status") != "removed" and f.get("filename", "").lower().endswith(".md")
+        ]
+        removed_md = [
+            f["filename"]
+            for f in files
+            if f.get("status") == "removed" and f.get("filename", "").lower().endswith(".md")
+        ]
 
     log_entry = await _run_webhook_ingestion_pipeline(
         repo_full_name=repo_clean,
-        branch="main",
+        branch=default_branch,
         pusher=pusher,
         commit_sha=commit_sha,
-        changed_md_paths=md_paths,
-        removed_md_paths=[],
+        changed_md_paths=changed_md,
+        removed_md_paths=removed_md,
         db=db,
         explicit_token=user.github_token,
     )
 
     return {
-        "message": f"Webhook Pipeline: {log_entry.message}",
-        "log": {
-            "id": log_entry.id,
-            "event_type": log_entry.event_type,
-            "commit_sha": log_entry.commit_sha,
-            "pusher": log_entry.pusher,
-            "affected_files": json.loads(log_entry.affected_files or "[]"),
-            "status": log_entry.status,
-            "message": log_entry.message,
-            "created_at": log_entry.created_at.isoformat(),
-        },
+        "message": log_entry.message,
+        "status": log_entry.status,
+        "commit_sha": log_entry.commit_sha,
+        "affected_files": json.loads(log_entry.affected_files),
     }
