@@ -12,3 +12,8 @@ def get_db():
         yield db
     finally:
         db.close()
+
+# backend/app/core/database.py
+from sqlalchemy.orm import declarative_base
+
+Base = declarative_base()  # Chỉ tạo Base tại đây

@@ -1,23 +1,40 @@
-import enum
-from sqlalchemy import Column, String, Enum, Boolean, DateTime
-from datetime import datetime
-import uuid
+from enum import Enum
+from sqlalchemy import Column, Integer, String, Boolean, DateTime
+from sqlalchemy.sql import func
+
+# Import Base dùng chung từ app.core.database
 from app.core.database import Base
 
-class Role(str, enum.Enum):
-    DEVELOPER = "DEVELOPER"          # Tác giả tạo/chỉnh sửa tài liệu
-    STAFF = "STAFF"                  # Duyệt vòng 1 (Reviewer)
-    MANAGER = "MANAGER"              # Phê duyệt vòng 2 & xuất bản (Approver)
-    TECH_LEAD = "TECH_LEAD"          # Quản trị Template & Sức khỏe tài liệu
-    ADMINISTRATOR = "ADMINISTRATOR"  # Quản trị toàn bộ người dùng & hệ thống
+
+class Role(str, Enum):
+    """Định nghĩa phân quyền đầy đủ cho dự án (RBAC)"""
+    ADMIN = "admin"
+    USER = "user"
+    DEVELOPER = "developer"
+    STAFF = "staff"
+    MANAGER = "manager"
+    TECH_LEAD = "tech_lead"
+    ADMINISTRATOR = "administrator"
+
 
 class User(Base):
     __tablename__ = "users"
+    
+    # Cho phép SQLAlchemy nạp lại định nghĩa bảng khi Uvicorn hot-reload
+    __table_args__ = {'extend_existing': True}
 
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    id = Column(Integer, primary_key=True, index=True)
     email = Column(String, unique=True, index=True, nullable=False)
-    hashed_password = Column(String, nullable=False)
-    full_name = Column(String, nullable=True)
-    role = Column(Enum(Role), default=Role.DEVELOPER, nullable=False)
+    username = Column(String, unique=True, index=True, nullable=True)
+    hashed_password = Column(String, nullable=True)  # Nullable cho trường hợp đăng nhập qua OAuth
+    
+    # Cột hỗ trợ GitHub OAuth
+    github_token = Column(String, nullable=True)
+    
+    # Phân quyền & trạng thái
+    role = Column(String, default=Role.USER.value)
     is_active = Column(Boolean, default=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    
+    # Thời gian tạo / cập nhật
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
