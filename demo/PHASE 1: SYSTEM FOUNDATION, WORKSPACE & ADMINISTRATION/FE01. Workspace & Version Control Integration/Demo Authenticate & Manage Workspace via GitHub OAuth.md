@@ -3,6 +3,7 @@
 **\*Xác thực tập trung qua GitHub OAuth 2.0 (Authenticate)**
 
 Kết nối GitHub OAuth:
+![Demo Frontend](/docs/images/fe1-1.png)
 
 
 Thay vì bắt người dùng tạo tài khoản rời rạc, LivingDocs tích hợp xác thực tập trung qua GitHub OAuth 2.0 với quyền `repo` và `user:email`. Khi người dùng cấp quyền, Backend nhận mã `code` tại endpoint `/api/v1/auth/github/callback`, đổi lấy `github_token`, tự động khởi tạo hồ sơ trong PostgreSQL với vai trò mặc định là `DEVELOPER` và cấp phát **JWT Token** trả về Frontend để quản lý phiên làm việc phi trạng thái."
