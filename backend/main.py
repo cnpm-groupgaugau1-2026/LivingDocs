@@ -28,7 +28,7 @@ from app.api.v1.doc_generation import router as doc_generation_router
 from app.api.v1.admin_users import router as admin_users_router
 from app.api.v1.admin_integrations import router as admin_integrations_router
 from app.api.v1.admin_ai_config import router as admin_ai_config_router
-
+from app.api.drift_detection import router as drift_router
 
 # ==============================================================================
 # --- DATABASE MODELS (DOCUMENT & WEBHOOK INGESTION LOGS) ---
@@ -71,6 +71,7 @@ app = FastAPI(
     version="2.0.0",
     description="Hệ thống RESTful API kết nối PostgreSQL với phân quyền 5 Actor & GitHub Workspace",
 )
+app.include_router(drift_router)
 
 app.add_middleware(
     CORSMiddleware,
