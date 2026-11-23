@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import AstDocGeneratorModal from '@/components/AstDocGeneratorModal';
 
 const API_BASE_URL = 'http://localhost:8000/api/v1';
 
@@ -692,6 +693,46 @@ export default function LivingDocsPage() {
     }
   };
 
+  const [isAstModalOpen, setIsAstModalOpen] = useState(false);
+
+  const handleApplyAstMarkdown = (
+    generatedMd: string,
+    applyMode: 'replace' | 'append',
+    suggestedTitle?: string,
+    suggestedFilePath?: string
+  ) => {
+    setDocs((prev) =>
+      prev.map((doc) => {
+        if (doc.id !== activeDoc.id) return doc;
+        const updatedContent =
+          applyMode === 'replace'
+            ? generatedMd
+            : `${doc.content.trimEnd()}
+
+${generatedMd}`;
+        const isDefaultTitle =
+          doc.title.startsWith('Hướng dẫn dự án') ||
+          doc.title.startsWith('Tài liệu mới') ||
+          !doc.title.trim();
+        return {
+          ...doc,
+          title: applyMode === 'replace' && suggestedTitle && isDefaultTitle ? suggestedTitle : doc.title,
+          filePath:
+            applyMode === 'replace' && suggestedFilePath && !doc.githubSha
+              ? suggestedFilePath
+              : doc.filePath,
+          content: updatedContent,
+          updatedAt: new Date().toLocaleTimeString('vi-VN'),
+        };
+      })
+    );
+    setMode('preview');
+    setBanner({
+      type: 'success',
+      message: 'Đã nạp bản nháp tài liệu sinh từ AST vào trình soạn thảo!',
+    });
+  };
+
   const filteredDocs = docs.filter((doc) =>
     doc.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -953,6 +994,15 @@ export default function LivingDocsPage() {
             >
               &lt;&gt;
             </button>
+            <span className="mx-1 h-4 w-px bg-[#30363d]" />
+            <button
+              onClick={() => setIsAstModalOpen(true)}
+              title="Phân tích AST mã nguồn & sinh tài liệu tự động (FE02)"
+              className="flex items-center gap-1.5 rounded-md border border-[#a371f7]/40 bg-[#a371f7]/15 px-2.5 py-1 text-xs font-semibold text-[#d2a8ff] transition hover:bg-[#a371f7]/25 hover:text-white"
+            >
+              <span>✨</span>
+              <span>Sinh tài liệu AI (AST)</span>
+            </button>
           </div>
 
           <div className="flex items-center gap-2.5">
@@ -1068,6 +1118,15 @@ export default function LivingDocsPage() {
           <div suppressHydrationWarning>Cập nhật lần cuối: {activeDoc.updatedAt}</div>
         </footer>
       </main>
+
+      <AstDocGeneratorModal
+        isOpen={isAstModalOpen}
+        onClose={() => setIsAstModalOpen(false)}
+        token={token}
+        selectedRepo={selectedRepo}
+        repos={repos}
+        onApplyMarkdown={handleApplyAstMarkdown}
+      />
     </div>
   );
 }
