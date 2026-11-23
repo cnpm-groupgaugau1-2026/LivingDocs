@@ -23,6 +23,7 @@ from app.models.integration_config import IntegrationConfig  # noqa: F401
 from app.models.ai_engine_config import AiEngineConfig  # noqa: F401
 from app.models.template import DocTemplate, DocTemplateVersion  # noqa: F401
 from app.api.v1.templates import router as templates_router
+from app.api.v1.doc_generation import router as doc_generation_router
 
 from app.api.v1.admin_users import router as admin_users_router
 from app.api.v1.admin_integrations import router as admin_integrations_router
@@ -314,6 +315,7 @@ app.include_router(
     dependencies=[Depends(RequireRole([Role.ADMINISTRATOR]))],
 )
 app.include_router(templates_router)
+app.include_router(doc_generation_router)
 
 # ==============================================================================
 # --- 1.1 & 1.2 GITHUB WORKSPACE MANAGEMENT & REPOSITORY SYNCHRONIZATION ---
