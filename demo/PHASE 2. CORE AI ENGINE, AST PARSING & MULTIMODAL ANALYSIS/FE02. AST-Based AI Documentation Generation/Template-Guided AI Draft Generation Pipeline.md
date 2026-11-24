@@ -5,6 +5,7 @@
 ## 1. Thao tác chạy Demo trực tiếp trên giao diện
 
 Giữ nguyên đoạn mã kiểm thử `services/billing_reconciler.py` (có đủ 3 mức cảnh báo `HIGH`, `MEDIUM`, `LOW` ở bước trước) trong khung soạn thảo bên trái và thực hiện 3 thao tác sau:
+ - ![Demo Frontend](/docs/images/a1.png)
 
 - **Chọn Template tài liệu (FE11):** Tại mục `TEMPLATE TÀI LIỆU (FE11)` ở góc dưới bên trái, giữ lựa chọn `Mặc định (AST Technical Specification)` (hoặc chọn một mẫu tài liệu khác đã cấu hình trong hệ thống như *API Reference*, *Service Architecture*).
 - **Nhập ngữ cảnh nghiệp vụ bổ sung:** Tại ô `GHI CHÚ NGỮ CẢNH BỔ SUNG`, nhập hướng dẫn cụ thể để định hướng AI tập trung vào các điểm trọng yếu:
