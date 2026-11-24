@@ -13,31 +13,35 @@ Trên giao diện, mỗi thẻ lỗi sẽ được gắn 1 trong **3 trạng th�
 **Bước 1 — Kiểm tra tổng quan tỷ lệ neo bằng chứng ở Kịch bản 1 (**`1. Tổng hợp cả 3 loại Drift`**):**
 
 - Nhìn lên góc trên bên phải của thẻ thống kê (`5.3 Grounding Anchors`).
-- ![Demo Frontend](/docs/images/b1)
+- ![Demo Frontend](/docs/images/b1.png)
 
 - **Kết quả :** Hệ thống báo `Đã neo: 6/6 • Neo kép AST: 5` (5 lỗi của hàm `process_payment` neo được cả hai đầu Tài liệu ↔ AST, còn 1 lỗi của hàm đã xóa `legacy_reconcile_invoice` chỉ neo ở phía Tài liệu)
 
 **Bước 2 — Kiểm tra khả năng "soi tận dòng lệnh AST" trên từng thẻ lỗi:**
 
 - Kéo xuống **thẻ số 1 (**`CRITICAL • 89/100`** — Mâu thuẫn hành vi **`read-only`**)**, nhìn vào khung tối màu **Bằng chứng AST** bên phải của phần `5.3 Grounding Evidence`.
-![Demo Frontend](/docs/images/b2)
+![Demo Frontend](/docs/images/b2.png)
 - **Kết quả :** Dù cả hàm `process_payment` dài 5 dòng, hệ thống vẫn khoanh sáng riêng **dòng 4** (`db.save_transaction(...)`) kèm nhãn `Node Proof: ast.Call(func='db.save_transaction', lineno=4)` và dòng chú thích giải thích ngay bên dưới.
 - Kéo tiếp xuống **thẻ số 4 (**`HIGH • 69/100`** — Thiếu mô tả ngoại lệ)**: khung bằng chứng AST tự động đổi sang khoanh sáng **dòng 3** (`raise ValueError(...)`) với `Node Proof: ast.Raise(exc='ValueError', lineno=3)`.
+- ![Demo Frontend](/docs/images/b3.png)
 
 **Bước 3 — Kiểm tra bằng chứng cho hàm bị xóa hẳn (Thẻ số 5 của Kịch bản 1):**
 
 - Kéo xuống **thẻ số 5 (**`MEDIUM • 59/100`** — **`legacy_reconcile_invoice`**)**.
+- ![Demo Frontend](/docs/images/b4.png)
 
 - **Kết quả :** Thẻ mang nhãn màu đỏ `Chỉ neo ở Tài liệu`, khung bên phải báo *Không tìm thấy nút AST tương ứng* và liệt kê rõ ký hiệu hợp lệ duy nhất đang có trong tệp là `process_payment`.
 
 **Bước 4 — Kiểm tra bằng chứng gợi ý hàm đổi tên ở Kịch bản 2 (**`2. Referential Drift`**):**
 
 - Bấm sang nút **2. Referential Drift** ở hàng kịch bản phía trên, sau đó xem **thẻ số 1 (**`verify_access_token`**)**.
+- ![Demo Frontend](/docs/images/b5.png)
 
 - **Kết quả :** Thẻ hiển thị nhãn màu vàng `Gợi ý hàm đổi tên AST`, khung bên phải tự động kéo đoạn code của hàm mới `validate_access_token` vào làm bằng chứng kèm ghi chú: *↳ Ứng viên đổi tên gần nhất trong AST: *`validate_access_token`.
 
 **Bước 5 — Kiểm tra gói ngữ cảnh chống ảo giác (**`AI Grounding Payload`**):**
 
 - Trên bất kỳ thẻ lỗi nào, bấm vào dòng chữ `Xem gói ngữ cảnh chống ảo giác cho AI Auto-Repair (AI Grounding Payload)` (hoặc bấm nút `Sao chép AI Grounding Payload` ở góc phải khung 5.3).
+- ![Demo Frontend](/docs/images/b6.png)
 
 - **Kết quả đúng:** Khung mở rộng hiển thị đầy đủ 5 phần chuẩn hóa (`DRIFT_SUMMARY`, `DOC_ANCHOR`, `AST_ANCHOR`, `VERIFIED_AST_FACTS`, và `REPAIR_CONSTRAINT` cấm AI tự bịa thêm tham số/hàm ngoài danh sách đã kiểm chứng).
