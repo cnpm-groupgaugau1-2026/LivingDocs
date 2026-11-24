@@ -36,8 +36,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.include_router(drift_router)
-app.include_router(multimodal_router)
+
 
 # ==============================================================================
 # --- PYDANTIC SCHEMAS ---

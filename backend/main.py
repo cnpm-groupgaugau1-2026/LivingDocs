@@ -1,3 +1,4 @@
+from app.api import auto_doc, grounding_diff
 import base64
 import hashlib
 import hmac
@@ -937,3 +938,6 @@ async def simulate_github_webhook_push(
         "commit_sha": log_entry.commit_sha,
         "affected_files": json.loads(log_entry.affected_files),
     }
+app.include_router(auto_doc.router)
+
+app.include_router(grounding_diff.router)
