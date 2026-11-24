@@ -9,10 +9,12 @@ Giữ nguyên đoạn mã kiểm thử `services/billing_reconciler.py` (có đ�
 
 - **Chọn Template tài liệu (FE11):** Tại mục `TEMPLATE TÀI LIỆU (FE11)` ở góc dưới bên trái, giữ lựa chọn `Mặc định (AST Technical Specification)` (hoặc chọn một mẫu tài liệu khác đã cấu hình trong hệ thống như *API Reference*, *Service Architecture*).
 - **Nhập ngữ cảnh nghiệp vụ bổ sung:** Tại ô `GHI CHÚ NGỮ CẢNH BỔ SUNG`, nhập hướng dẫn cụ thể để định hướng AI tập trung vào các điểm trọng yếu:
+-  - ![Demo Frontend](/docs/images/a2.png)
 
 **Kích hoạt Pipeline sinh tài liệu:** Bấm nút màu xanh lá `✨ Sinh bản nháp Markdown` ở góc dưới bên trái và chờ hệ thống xử lý.
 
 **2. Kết quả hiển thị & Kiểm chứng trên tab **`Bản nháp Markdown AI`
+ - ![Demo Frontend](/docs/images/a3.png)
 
 Ngay khi API phản hồi, giao diện cột bên phải tự động chuyển từ tab `Độ phủ & Lỗ hổng AST` sang tab `Bản nháp Markdown AI` với 4 thành phần chính:
 
@@ -20,6 +22,7 @@ Ngay khi API phản hồi, giao diện cột bên phải tự động chuyển t
 - **Khung xem trước / Mã nguồn Markdown:** Chứa tài liệu kỹ thuật hoàn chỉnh được định dạng chuẩn bảng biểu, khối mã chữ ký hàm và danh sách tham số trích xuất từ AST.
 - **Mục tổng hợp đề xuất cải thiện (Coverage Action Items):** Hệ thống tự động trích xuất các cảnh báo `HIGH` (`reconcile_batch`), `MEDIUM` (`archive_log`) và `LOW` (`format_summary`) từ Module 4.2 thành danh sách việc cần bổ sung ở cuối tài liệu.
 - **Nút thao tác xuất bản:** Cho phép **Sao chép Markdown** hoặc **Chèn trực tiếp vào trình soạn thảo** (đẩy thẳng nội dung vào trang tài liệu chính của LivingDocs để lưu trữ và đồng bộ).
+-  - ![Demo Frontend](/docs/images/a4.png)
 
 Quy trình khép kín của phân hệ **FE02** đã hoàn tất: bản nháp tài liệu sinh từ cây cú pháp AST đã được nạp thẳng vào trình soạn thảo chính của LivingDocs và sẵn sàng đồng bộ ngược lên GitHub.
 
