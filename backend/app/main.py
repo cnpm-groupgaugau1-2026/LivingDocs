@@ -381,3 +381,6 @@ from app.db.database import Base, engine
 
 Base.metadata.create_all(bind=engine)  # Đảm bảo bảng ai_engine_configs được tạo
 app.include_router(admin_ai_config.router, prefix="/api/v1")
+
+from app.api import review_workflow
+app.include_router(review_workflow.router)

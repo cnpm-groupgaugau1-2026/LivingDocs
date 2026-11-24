@@ -941,3 +941,6 @@ async def simulate_github_webhook_push(
 app.include_router(auto_doc.router)
 
 app.include_router(grounding_diff.router)
+
+from app.api import review_workflow
+app.include_router(review_workflow.router)

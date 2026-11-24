@@ -4761,5 +4761,1365 @@
     "verified_count": 0,
     "flagged_count": 0,
     "pending_count": 3
+  },
+  "gd_10b81f26": {
+    "session_id": "gd_10b81f26",
+    "preset_id": "live_fe05_multimodal",
+    "title": "PR #42 • Đồng bộ tài liệu Pipeline Kiểm chứng Kiến trúc FE05.3 (Live Repo Grounding)",
+    "repo_name": "cnpm-groupgaugau1-2026/LivingDocs",
+    "branch": "main",
+    "commit_hash": "5f9e0dff3a42a8085301a2020bbe884dae887594",
+    "pr_number": 42,
+    "target_doc_path": "docs/architecture/multimodal_pipeline.md",
+    "source_code_files": [
+      "backend/app/api/multimodal.py",
+      "backend/app/services/visual_consistency_service.py",
+      "backend/app/services/vision_context_extractor_service.py"
+    ],
+    "code_diff_lines": [
+      {
+        "line_index": 0,
+        "line_type": "hunk_header",
+        "old_line_num": null,
+        "new_line_num": null,
+        "content": "diff --git a/backend/app/api/multimodal.py b/backend/app/api/multimodal.py",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 1,
+        "line_type": "hunk_header",
+        "old_line_num": null,
+        "new_line_num": null,
+        "content": "@@ -70,4 +70,11 @@ router = APIRouter(prefix='/api/v1/multimodal')",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 2,
+        "line_type": "context",
+        "old_line_num": 70,
+        "new_line_num": 70,
+        "content": "    return await vision_extractor.extract_context(file_bytes, filename=file.filename)",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 3,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 71,
+        "content": "+@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": [
+          "EV-01"
+        ]
+      },
+      {
+        "line_index": 4,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 72,
+        "content": "+async def verify_visual_code_consistency(file: UploadFile, repo_path: str = ''):",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": [
+          "EV-01"
+        ]
+      },
+      {
+        "line_index": 5,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 73,
+        "content": "+    return await consistency_verifier.verify_consistency(file_bytes, repo_path=repo_path)",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": [
+          "EV-01"
+        ]
+      },
+      {
+        "line_index": 6,
+        "line_type": "hunk_header",
+        "old_line_num": null,
+        "new_line_num": null,
+        "content": "diff --git a/backend/app/services/visual_consistency_service.py b/backend/app/services/visual_consistency_service.py",
+        "file_path": "backend/app/services/visual_consistency_service.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 7,
+        "line_type": "hunk_header",
+        "old_line_num": null,
+        "new_line_num": null,
+        "content": "@@ -17,2 +17,8 @@ AST & Route Indexer",
+        "file_path": "backend/app/services/visual_consistency_service.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 8,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 17,
+        "content": "+class VisualAssetConsistencyVerifier:",
+        "file_path": "backend/app/services/visual_consistency_service.py",
+        "evidence_ids": [
+          "EV-02"
+        ]
+      },
+      {
+        "line_index": 9,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 18,
+        "content": "+    def _index_repository_ast(self, repo_root: Path) -> Dict[str, Any]:",
+        "file_path": "backend/app/services/visual_consistency_service.py",
+        "evidence_ids": [
+          "EV-02"
+        ]
+      },
+      {
+        "line_index": 10,
+        "line_type": "hunk_header",
+        "old_line_num": null,
+        "new_line_num": null,
+        "content": "diff --git a/backend/app/services/vision_context_extractor_service.py b/backend/app/services/vision_context_extractor_service.py",
+        "file_path": "backend/app/services/vision_context_extractor_service.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 11,
+        "line_type": "removed",
+        "old_line_num": 31,
+        "new_line_num": null,
+        "content": "-    async def extract_context(self, file_bytes: bytes) -> VisionContextResponse:",
+        "file_path": "backend/app/services/vision_context_extractor_service.py",
+        "evidence_ids": [
+          "EV-03"
+        ]
+      },
+      {
+        "line_index": 12,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 31,
+        "content": "+    async def extract_context(self, file_bytes: bytes, filename: str = 'diagram.png', content_type: str = 'image/png'):",
+        "file_path": "backend/app/services/vision_context_extractor_service.py",
+        "evidence_ids": [
+          "EV-03"
+        ]
+      }
+    ],
+    "doc_patch_lines": [
+      {
+        "line_index": 0,
+        "line_type": "hunk_header",
+        "old_doc_line_num": null,
+        "new_doc_line_num": null,
+        "content": "@@ -12,6 +12,13 @@ docs/architecture/multimodal_pipeline.md",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 1,
+        "line_type": "context",
+        "old_doc_line_num": 12,
+        "new_doc_line_num": 12,
+        "content": "## 2. Danh sách API Endpoints & Kiến trúc Xử lý (FE05)",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 2,
+        "line_type": "removed",
+        "old_doc_line_num": 13,
+        "new_doc_line_num": null,
+        "content": "- - `VisionContextExtractor.extract_context(file_bytes)`: Chỉ hỗ trợ ảnh đơn lẻ.",
+        "evidence_ids": [
+          "EV-03"
+        ]
+      },
+      {
+        "line_index": 3,
+        "line_type": "added",
+        "old_doc_line_num": null,
+        "new_doc_line_num": 13,
+        "content": "+ - `VisionContextExtractor.extract_context(file_bytes, filename, content_type)`: Hỗ trợ ảnh kỹ thuật và tài liệu PDF đa trang.",
+        "evidence_ids": [
+          "EV-03"
+        ]
+      },
+      {
+        "line_index": 4,
+        "line_type": "added",
+        "old_doc_line_num": null,
+        "new_doc_line_num": 14,
+        "content": "+ - `POST /api/v1/multimodal/verify-consistency`: Đối chiếu đồ thị kiến trúc trực quan với mã nguồn thật.",
+        "evidence_ids": [
+          "EV-01"
+        ]
+      },
+      {
+        "line_index": 5,
+        "line_type": "added",
+        "old_doc_line_num": null,
+        "new_doc_line_num": 15,
+        "content": "+   - Tham số tùy chọn `repo_path` cho phép quét cây thư mục repository tùy chỉnh.",
+        "evidence_ids": [
+          "EV-01"
+        ]
+      },
+      {
+        "line_index": 6,
+        "line_type": "added",
+        "old_doc_line_num": null,
+        "new_doc_line_num": 16,
+        "content": "+ - **AST Drift Verifier (`VisualAssetConsistencyVerifier`):** Lập chỉ mục `ClassDef`, `FunctionDef`, `@router` và kiểm tra chiều gọi hàm.",
+        "evidence_ids": [
+          "EV-02"
+        ]
+      },
+      {
+        "line_index": 7,
+        "line_type": "context",
+        "old_doc_line_num": 14,
+        "new_doc_line_num": 17,
+        "content": "- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ sơ đồ.",
+        "evidence_ids": []
+      }
+    ],
+    "mapping_links": [
+      {
+        "link_id": "LNK-01",
+        "evidence_id": "EV-01",
+        "code_file_path": "backend/app/api/multimodal.py",
+        "code_line_indices": [
+          3,
+          4,
+          5
+        ],
+        "doc_line_indices": [
+          4,
+          5
+        ],
+        "rationale": "Khớp trực tiếp route decorator @router.post('/verify-consistency') và tham số repo_path với đặc tả API mới trong tài liệu.",
+        "confidence": 0.99
+      },
+      {
+        "link_id": "LNK-02",
+        "evidence_id": "EV-02",
+        "code_file_path": "backend/app/services/visual_consistency_service.py",
+        "code_line_indices": [
+          8,
+          9
+        ],
+        "doc_line_indices": [
+          6
+        ],
+        "rationale": "Ánh xạ định nghĩa lớp VisualAssetConsistencyVerifier sang mục mô tả cơ chế AST Drift Verifier.",
+        "confidence": 0.97
+      },
+      {
+        "link_id": "LNK-03",
+        "evidence_id": "EV-03",
+        "code_file_path": "backend/app/services/vision_context_extractor_service.py",
+        "code_line_indices": [
+          11,
+          12
+        ],
+        "doc_line_indices": [
+          2,
+          3
+        ],
+        "rationale": "Thay thế chữ ký hàm cũ bằng chữ ký mới hỗ trợ filename và content_type cho tài liệu PDF.",
+        "confidence": 0.98
+      }
+    ],
+    "evidences": [
+      {
+        "evidence_id": "EV-01",
+        "claim_summary": "Bổ sung endpoint POST /api/v1/multimodal/verify-consistency nhận tệp sơ đồ và tham số repo_path.",
+        "symbol_name": "POST /api/v1/multimodal/verify-consistency",
+        "symbol_kind": "endpoint",
+        "file_path": "backend/app/api/multimodal.py",
+        "start_line": 70,
+        "end_line": 78,
+        "commit_hash": "5f9e0dff3a42a8085301a2020bbe884dae887594",
+        "commit_short": "5f9e0dff",
+        "commit_message": "chore: update backend and frontend",
+        "commit_author": "tienndq546498-beep",
+        "commit_date": "2026-11-25 04:36:42 +0700",
+        "branch": "main",
+        "code_snippet": "@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)\nasync def verify_visual_code_consistency(file: UploadFile, repo_path: str = ''):",
+        "doc_patch_excerpt": "POST /api/v1/multimodal/verify-consistency: Đối chiếu đồ thị kiến trúc trực quan với mã nguồn thật.",
+        "repo_grounding_status": "VERIFIED_IN_REPO",
+        "repo_actual_excerpt": "  70 | \n  71 | @router.post(\"/verify-consistency\", response_model=VisualCodeConsistencyResponse)\n  72 | async def verify_visual_code_consistency(\n  73 |     file: UploadFile = File(...),\n  74 |     context_hint: str = Form(default=\"\"),\n  75 |     repo_path: str = Form(default=\"\"),\n  76 | ):\n  77 |     \"\"\"\n  78 |     FE05.3 - Visual Asset - Code Consistency Verification Pipeline",
+        "reviewer_status": "pending",
+        "reviewer_note": ""
+      },
+      {
+        "evidence_id": "EV-02",
+        "claim_summary": "Lớp VisualAssetConsistencyVerifier phân tích AST để lập chỉ mục lớp, hàm và tuyến định tuyến.",
+        "symbol_name": "VisualAssetConsistencyVerifier._index_repository_ast",
+        "symbol_kind": "class",
+        "file_path": "backend/app/services/visual_consistency_service.py",
+        "start_line": 17,
+        "end_line": 25,
+        "commit_hash": "5f9e0dff3a42a8085301a2020bbe884dae887594",
+        "commit_short": "5f9e0dff",
+        "commit_message": "chore: update backend and frontend",
+        "commit_author": "tienndq546498-beep",
+        "commit_date": "2026-11-25 04:36:42 +0700",
+        "branch": "main",
+        "code_snippet": "class VisualAssetConsistencyVerifier:\n    def _index_repository_ast(self, repo_root: Path) -> Dict[str, Any]:",
+        "doc_patch_excerpt": "AST Drift Verifier (VisualAssetConsistencyVerifier): Lập chỉ mục ClassDef, FunctionDef, @router và kiểm tra chiều gọi hàm.",
+        "repo_grounding_status": "VERIFIED_IN_REPO",
+        "repo_actual_excerpt": "  17 | \n  18 | class VisualAssetConsistencyVerifier:\n  19 |     \"\"\"\n  20 |     FE05.3 - Visual Asset - Code Consistency Verification Pipeline\n  21 |     Kết nối đầu ra đồ thị & khẳng định kiến trúc từ FE05.2 (VisionContextExtractor)\n  22 |     với bộ lập chỉ mục mã nguồn thật (Python AST + API Route Scanner) để phát hiện Drift.\n  23 |     \"\"\"\n  24 | \n  25 |     IGNORED_DIRS: Set[str] = {",
+        "reviewer_status": "pending",
+        "reviewer_note": ""
+      },
+      {
+        "evidence_id": "EV-03",
+        "claim_summary": "Mở rộng chữ ký hàm extract_context() nhận thêm filename và content_type để xử lý PDF đa trang.",
+        "symbol_name": "VisionContextExtractor.extract_context",
+        "symbol_kind": "function",
+        "file_path": "backend/app/services/vision_context_extractor_service.py",
+        "start_line": 31,
+        "end_line": 39,
+        "commit_hash": "5f9e0dff3a42a8085301a2020bbe884dae887594",
+        "commit_short": "5f9e0dff",
+        "commit_message": "chore: update backend and frontend",
+        "commit_author": "tienndq546498-beep",
+        "commit_date": "2026-11-25 04:36:42 +0700",
+        "branch": "main",
+        "code_snippet": "async def extract_context(self, file_bytes: bytes, filename: str = 'diagram.png', content_type: str = 'image/png'):",
+        "doc_patch_excerpt": "VisionContextExtractor.extract_context(file_bytes, filename, content_type): Hỗ trợ ảnh kỹ thuật và tài liệu PDF đa trang.",
+        "repo_grounding_status": "VERIFIED_IN_REPO",
+        "repo_actual_excerpt": "  31 | \n  32 |     async def extract_context(\n  33 |         self,\n  34 |         file_bytes: bytes,\n  35 |         filename: str,\n  36 |         content_type: str = \"\",\n  37 |         context_hint: str = \"\",\n  38 |     ) -> VisionContextExtractionResponse:\n  39 |         # 1. Chạy FE05.1 OCR Engine để lấy nền tảng văn bản chuẩn hóa & thực thể kỹ thuật",
+        "reviewer_status": "pending",
+        "reviewer_note": ""
+      }
+    ],
+    "grounding_coverage_score": 100.0,
+    "verified_count": 0,
+    "flagged_count": 0,
+    "pending_count": 3
+  },
+  "gd_5698761e": {
+    "session_id": "gd_5698761e",
+    "preset_id": "live_fe05_multimodal",
+    "title": "PR #42 • Đồng bộ tài liệu Pipeline Kiểm chứng Kiến trúc FE05.3 (Live Repo Grounding)",
+    "repo_name": "cnpm-groupgaugau1-2026/LivingDocs",
+    "branch": "main",
+    "commit_hash": "5f9e0dff3a42a8085301a2020bbe884dae887594",
+    "pr_number": 42,
+    "target_doc_path": "docs/architecture/multimodal_pipeline.md",
+    "source_code_files": [
+      "backend/app/api/multimodal.py",
+      "backend/app/services/visual_consistency_service.py",
+      "backend/app/services/vision_context_extractor_service.py"
+    ],
+    "code_diff_lines": [
+      {
+        "line_index": 0,
+        "line_type": "hunk_header",
+        "old_line_num": null,
+        "new_line_num": null,
+        "content": "diff --git a/backend/app/api/multimodal.py b/backend/app/api/multimodal.py",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 1,
+        "line_type": "hunk_header",
+        "old_line_num": null,
+        "new_line_num": null,
+        "content": "@@ -70,4 +70,11 @@ router = APIRouter(prefix='/api/v1/multimodal')",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 2,
+        "line_type": "context",
+        "old_line_num": 70,
+        "new_line_num": 70,
+        "content": "    return await vision_extractor.extract_context(file_bytes, filename=file.filename)",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 3,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 71,
+        "content": "+@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": [
+          "EV-01"
+        ]
+      },
+      {
+        "line_index": 4,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 72,
+        "content": "+async def verify_visual_code_consistency(file: UploadFile, repo_path: str = ''):",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": [
+          "EV-01"
+        ]
+      },
+      {
+        "line_index": 5,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 73,
+        "content": "+    return await consistency_verifier.verify_consistency(file_bytes, repo_path=repo_path)",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": [
+          "EV-01"
+        ]
+      },
+      {
+        "line_index": 6,
+        "line_type": "hunk_header",
+        "old_line_num": null,
+        "new_line_num": null,
+        "content": "diff --git a/backend/app/services/visual_consistency_service.py b/backend/app/services/visual_consistency_service.py",
+        "file_path": "backend/app/services/visual_consistency_service.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 7,
+        "line_type": "hunk_header",
+        "old_line_num": null,
+        "new_line_num": null,
+        "content": "@@ -17,2 +17,8 @@ AST & Route Indexer",
+        "file_path": "backend/app/services/visual_consistency_service.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 8,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 17,
+        "content": "+class VisualAssetConsistencyVerifier:",
+        "file_path": "backend/app/services/visual_consistency_service.py",
+        "evidence_ids": [
+          "EV-02"
+        ]
+      },
+      {
+        "line_index": 9,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 18,
+        "content": "+    def _index_repository_ast(self, repo_root: Path) -> Dict[str, Any]:",
+        "file_path": "backend/app/services/visual_consistency_service.py",
+        "evidence_ids": [
+          "EV-02"
+        ]
+      },
+      {
+        "line_index": 10,
+        "line_type": "hunk_header",
+        "old_line_num": null,
+        "new_line_num": null,
+        "content": "diff --git a/backend/app/services/vision_context_extractor_service.py b/backend/app/services/vision_context_extractor_service.py",
+        "file_path": "backend/app/services/vision_context_extractor_service.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 11,
+        "line_type": "removed",
+        "old_line_num": 31,
+        "new_line_num": null,
+        "content": "-    async def extract_context(self, file_bytes: bytes) -> VisionContextResponse:",
+        "file_path": "backend/app/services/vision_context_extractor_service.py",
+        "evidence_ids": [
+          "EV-03"
+        ]
+      },
+      {
+        "line_index": 12,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 31,
+        "content": "+    async def extract_context(self, file_bytes: bytes, filename: str = 'diagram.png', content_type: str = 'image/png'):",
+        "file_path": "backend/app/services/vision_context_extractor_service.py",
+        "evidence_ids": [
+          "EV-03"
+        ]
+      }
+    ],
+    "doc_patch_lines": [
+      {
+        "line_index": 0,
+        "line_type": "hunk_header",
+        "old_doc_line_num": null,
+        "new_doc_line_num": null,
+        "content": "@@ -12,6 +12,13 @@ docs/architecture/multimodal_pipeline.md",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 1,
+        "line_type": "context",
+        "old_doc_line_num": 12,
+        "new_doc_line_num": 12,
+        "content": "## 2. Danh sách API Endpoints & Kiến trúc Xử lý (FE05)",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 2,
+        "line_type": "removed",
+        "old_doc_line_num": 13,
+        "new_doc_line_num": null,
+        "content": "- - `VisionContextExtractor.extract_context(file_bytes)`: Chỉ hỗ trợ ảnh đơn lẻ.",
+        "evidence_ids": [
+          "EV-03"
+        ]
+      },
+      {
+        "line_index": 3,
+        "line_type": "added",
+        "old_doc_line_num": null,
+        "new_doc_line_num": 13,
+        "content": "+ - `VisionContextExtractor.extract_context(file_bytes, filename, content_type)`: Hỗ trợ ảnh kỹ thuật và tài liệu PDF đa trang.",
+        "evidence_ids": [
+          "EV-03"
+        ]
+      },
+      {
+        "line_index": 4,
+        "line_type": "added",
+        "old_doc_line_num": null,
+        "new_doc_line_num": 14,
+        "content": "+ - `POST /api/v1/multimodal/verify-consistency`: Đối chiếu đồ thị kiến trúc trực quan với mã nguồn thật.",
+        "evidence_ids": [
+          "EV-01"
+        ]
+      },
+      {
+        "line_index": 5,
+        "line_type": "added",
+        "old_doc_line_num": null,
+        "new_doc_line_num": 15,
+        "content": "+   - Tham số tùy chọn `repo_path` cho phép quét cây thư mục repository tùy chỉnh.",
+        "evidence_ids": [
+          "EV-01"
+        ]
+      },
+      {
+        "line_index": 6,
+        "line_type": "added",
+        "old_doc_line_num": null,
+        "new_doc_line_num": 16,
+        "content": "+ - **AST Drift Verifier (`VisualAssetConsistencyVerifier`):** Lập chỉ mục `ClassDef`, `FunctionDef`, `@router` và kiểm tra chiều gọi hàm.",
+        "evidence_ids": [
+          "EV-02"
+        ]
+      },
+      {
+        "line_index": 7,
+        "line_type": "context",
+        "old_doc_line_num": 14,
+        "new_doc_line_num": 17,
+        "content": "- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ sơ đồ.",
+        "evidence_ids": []
+      }
+    ],
+    "mapping_links": [
+      {
+        "link_id": "LNK-01",
+        "evidence_id": "EV-01",
+        "code_file_path": "backend/app/api/multimodal.py",
+        "code_line_indices": [
+          3,
+          4,
+          5
+        ],
+        "doc_line_indices": [
+          4,
+          5
+        ],
+        "rationale": "Khớp trực tiếp route decorator @router.post('/verify-consistency') và tham số repo_path với đặc tả API mới trong tài liệu.",
+        "confidence": 0.99
+      },
+      {
+        "link_id": "LNK-02",
+        "evidence_id": "EV-02",
+        "code_file_path": "backend/app/services/visual_consistency_service.py",
+        "code_line_indices": [
+          8,
+          9
+        ],
+        "doc_line_indices": [
+          6
+        ],
+        "rationale": "Ánh xạ định nghĩa lớp VisualAssetConsistencyVerifier sang mục mô tả cơ chế AST Drift Verifier.",
+        "confidence": 0.97
+      },
+      {
+        "link_id": "LNK-03",
+        "evidence_id": "EV-03",
+        "code_file_path": "backend/app/services/vision_context_extractor_service.py",
+        "code_line_indices": [
+          11,
+          12
+        ],
+        "doc_line_indices": [
+          2,
+          3
+        ],
+        "rationale": "Thay thế chữ ký hàm cũ bằng chữ ký mới hỗ trợ filename và content_type cho tài liệu PDF.",
+        "confidence": 0.98
+      }
+    ],
+    "evidences": [
+      {
+        "evidence_id": "EV-01",
+        "claim_summary": "Bổ sung endpoint POST /api/v1/multimodal/verify-consistency nhận tệp sơ đồ và tham số repo_path.",
+        "symbol_name": "POST /api/v1/multimodal/verify-consistency",
+        "symbol_kind": "endpoint",
+        "file_path": "backend/app/api/multimodal.py",
+        "start_line": 70,
+        "end_line": 78,
+        "commit_hash": "5f9e0dff3a42a8085301a2020bbe884dae887594",
+        "commit_short": "5f9e0dff",
+        "commit_message": "chore: update backend and frontend",
+        "commit_author": "tienndq546498-beep",
+        "commit_date": "2026-11-25 04:36:42 +0700",
+        "branch": "main",
+        "code_snippet": "@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)\nasync def verify_visual_code_consistency(file: UploadFile, repo_path: str = ''):",
+        "doc_patch_excerpt": "POST /api/v1/multimodal/verify-consistency: Đối chiếu đồ thị kiến trúc trực quan với mã nguồn thật.",
+        "repo_grounding_status": "VERIFIED_IN_REPO",
+        "repo_actual_excerpt": "  70 | \n  71 | @router.post(\"/verify-consistency\", response_model=VisualCodeConsistencyResponse)\n  72 | async def verify_visual_code_consistency(\n  73 |     file: UploadFile = File(...),\n  74 |     context_hint: str = Form(default=\"\"),\n  75 |     repo_path: str = Form(default=\"\"),\n  76 | ):\n  77 |     \"\"\"\n  78 |     FE05.3 - Visual Asset - Code Consistency Verification Pipeline",
+        "reviewer_status": "pending",
+        "reviewer_note": ""
+      },
+      {
+        "evidence_id": "EV-02",
+        "claim_summary": "Lớp VisualAssetConsistencyVerifier phân tích AST để lập chỉ mục lớp, hàm và tuyến định tuyến.",
+        "symbol_name": "VisualAssetConsistencyVerifier._index_repository_ast",
+        "symbol_kind": "class",
+        "file_path": "backend/app/services/visual_consistency_service.py",
+        "start_line": 17,
+        "end_line": 25,
+        "commit_hash": "5f9e0dff3a42a8085301a2020bbe884dae887594",
+        "commit_short": "5f9e0dff",
+        "commit_message": "chore: update backend and frontend",
+        "commit_author": "tienndq546498-beep",
+        "commit_date": "2026-11-25 04:36:42 +0700",
+        "branch": "main",
+        "code_snippet": "class VisualAssetConsistencyVerifier:\n    def _index_repository_ast(self, repo_root: Path) -> Dict[str, Any]:",
+        "doc_patch_excerpt": "AST Drift Verifier (VisualAssetConsistencyVerifier): Lập chỉ mục ClassDef, FunctionDef, @router và kiểm tra chiều gọi hàm.",
+        "repo_grounding_status": "VERIFIED_IN_REPO",
+        "repo_actual_excerpt": "  17 | \n  18 | class VisualAssetConsistencyVerifier:\n  19 |     \"\"\"\n  20 |     FE05.3 - Visual Asset - Code Consistency Verification Pipeline\n  21 |     Kết nối đầu ra đồ thị & khẳng định kiến trúc từ FE05.2 (VisionContextExtractor)\n  22 |     với bộ lập chỉ mục mã nguồn thật (Python AST + API Route Scanner) để phát hiện Drift.\n  23 |     \"\"\"\n  24 | \n  25 |     IGNORED_DIRS: Set[str] = {",
+        "reviewer_status": "pending",
+        "reviewer_note": ""
+      },
+      {
+        "evidence_id": "EV-03",
+        "claim_summary": "Mở rộng chữ ký hàm extract_context() nhận thêm filename và content_type để xử lý PDF đa trang.",
+        "symbol_name": "VisionContextExtractor.extract_context",
+        "symbol_kind": "function",
+        "file_path": "backend/app/services/vision_context_extractor_service.py",
+        "start_line": 31,
+        "end_line": 39,
+        "commit_hash": "5f9e0dff3a42a8085301a2020bbe884dae887594",
+        "commit_short": "5f9e0dff",
+        "commit_message": "chore: update backend and frontend",
+        "commit_author": "tienndq546498-beep",
+        "commit_date": "2026-11-25 04:36:42 +0700",
+        "branch": "main",
+        "code_snippet": "async def extract_context(self, file_bytes: bytes, filename: str = 'diagram.png', content_type: str = 'image/png'):",
+        "doc_patch_excerpt": "VisionContextExtractor.extract_context(file_bytes, filename, content_type): Hỗ trợ ảnh kỹ thuật và tài liệu PDF đa trang.",
+        "repo_grounding_status": "VERIFIED_IN_REPO",
+        "repo_actual_excerpt": "  31 | \n  32 |     async def extract_context(\n  33 |         self,\n  34 |         file_bytes: bytes,\n  35 |         filename: str,\n  36 |         content_type: str = \"\",\n  37 |         context_hint: str = \"\",\n  38 |     ) -> VisionContextExtractionResponse:\n  39 |         # 1. Chạy FE05.1 OCR Engine để lấy nền tảng văn bản chuẩn hóa & thực thể kỹ thuật",
+        "reviewer_status": "pending",
+        "reviewer_note": ""
+      }
+    ],
+    "grounding_coverage_score": 100.0,
+    "verified_count": 0,
+    "flagged_count": 0,
+    "pending_count": 3
+  },
+  "gd_3b4e1687": {
+    "session_id": "gd_3b4e1687",
+    "preset_id": "live_fe05_multimodal",
+    "title": "PR #42 • Đồng bộ tài liệu Pipeline Kiểm chứng Kiến trúc FE05.3 (Live Repo Grounding)",
+    "repo_name": "cnpm-groupgaugau1-2026/LivingDocs",
+    "branch": "main",
+    "commit_hash": "5f9e0dff3a42a8085301a2020bbe884dae887594",
+    "pr_number": 42,
+    "target_doc_path": "docs/architecture/multimodal_pipeline.md",
+    "source_code_files": [
+      "backend/app/api/multimodal.py",
+      "backend/app/services/visual_consistency_service.py",
+      "backend/app/services/vision_context_extractor_service.py"
+    ],
+    "code_diff_lines": [
+      {
+        "line_index": 0,
+        "line_type": "hunk_header",
+        "old_line_num": null,
+        "new_line_num": null,
+        "content": "diff --git a/backend/app/api/multimodal.py b/backend/app/api/multimodal.py",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 1,
+        "line_type": "hunk_header",
+        "old_line_num": null,
+        "new_line_num": null,
+        "content": "@@ -70,4 +70,11 @@ router = APIRouter(prefix='/api/v1/multimodal')",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 2,
+        "line_type": "context",
+        "old_line_num": 70,
+        "new_line_num": 70,
+        "content": "    return await vision_extractor.extract_context(file_bytes, filename=file.filename)",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 3,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 71,
+        "content": "+@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": [
+          "EV-01"
+        ]
+      },
+      {
+        "line_index": 4,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 72,
+        "content": "+async def verify_visual_code_consistency(file: UploadFile, repo_path: str = ''):",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": [
+          "EV-01"
+        ]
+      },
+      {
+        "line_index": 5,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 73,
+        "content": "+    return await consistency_verifier.verify_consistency(file_bytes, repo_path=repo_path)",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": [
+          "EV-01"
+        ]
+      },
+      {
+        "line_index": 6,
+        "line_type": "hunk_header",
+        "old_line_num": null,
+        "new_line_num": null,
+        "content": "diff --git a/backend/app/services/visual_consistency_service.py b/backend/app/services/visual_consistency_service.py",
+        "file_path": "backend/app/services/visual_consistency_service.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 7,
+        "line_type": "hunk_header",
+        "old_line_num": null,
+        "new_line_num": null,
+        "content": "@@ -17,2 +17,8 @@ AST & Route Indexer",
+        "file_path": "backend/app/services/visual_consistency_service.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 8,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 17,
+        "content": "+class VisualAssetConsistencyVerifier:",
+        "file_path": "backend/app/services/visual_consistency_service.py",
+        "evidence_ids": [
+          "EV-02"
+        ]
+      },
+      {
+        "line_index": 9,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 18,
+        "content": "+    def _index_repository_ast(self, repo_root: Path) -> Dict[str, Any]:",
+        "file_path": "backend/app/services/visual_consistency_service.py",
+        "evidence_ids": [
+          "EV-02"
+        ]
+      },
+      {
+        "line_index": 10,
+        "line_type": "hunk_header",
+        "old_line_num": null,
+        "new_line_num": null,
+        "content": "diff --git a/backend/app/services/vision_context_extractor_service.py b/backend/app/services/vision_context_extractor_service.py",
+        "file_path": "backend/app/services/vision_context_extractor_service.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 11,
+        "line_type": "removed",
+        "old_line_num": 31,
+        "new_line_num": null,
+        "content": "-    async def extract_context(self, file_bytes: bytes) -> VisionContextResponse:",
+        "file_path": "backend/app/services/vision_context_extractor_service.py",
+        "evidence_ids": [
+          "EV-03"
+        ]
+      },
+      {
+        "line_index": 12,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 31,
+        "content": "+    async def extract_context(self, file_bytes: bytes, filename: str = 'diagram.png', content_type: str = 'image/png'):",
+        "file_path": "backend/app/services/vision_context_extractor_service.py",
+        "evidence_ids": [
+          "EV-03"
+        ]
+      }
+    ],
+    "doc_patch_lines": [
+      {
+        "line_index": 0,
+        "line_type": "hunk_header",
+        "old_doc_line_num": null,
+        "new_doc_line_num": null,
+        "content": "@@ -12,6 +12,13 @@ docs/architecture/multimodal_pipeline.md",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 1,
+        "line_type": "context",
+        "old_doc_line_num": 12,
+        "new_doc_line_num": 12,
+        "content": "## 2. Danh sách API Endpoints & Kiến trúc Xử lý (FE05)",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 2,
+        "line_type": "removed",
+        "old_doc_line_num": 13,
+        "new_doc_line_num": null,
+        "content": "- - `VisionContextExtractor.extract_context(file_bytes)`: Chỉ hỗ trợ ảnh đơn lẻ.",
+        "evidence_ids": [
+          "EV-03"
+        ]
+      },
+      {
+        "line_index": 3,
+        "line_type": "added",
+        "old_doc_line_num": null,
+        "new_doc_line_num": 13,
+        "content": "+ - `VisionContextExtractor.extract_context(file_bytes, filename, content_type)`: Hỗ trợ ảnh kỹ thuật và tài liệu PDF đa trang.",
+        "evidence_ids": [
+          "EV-03"
+        ]
+      },
+      {
+        "line_index": 4,
+        "line_type": "added",
+        "old_doc_line_num": null,
+        "new_doc_line_num": 14,
+        "content": "+ - `POST /api/v1/multimodal/verify-consistency`: Đối chiếu đồ thị kiến trúc trực quan với mã nguồn thật.",
+        "evidence_ids": [
+          "EV-01"
+        ]
+      },
+      {
+        "line_index": 5,
+        "line_type": "added",
+        "old_doc_line_num": null,
+        "new_doc_line_num": 15,
+        "content": "+   - Tham số tùy chọn `repo_path` cho phép quét cây thư mục repository tùy chỉnh.",
+        "evidence_ids": [
+          "EV-01"
+        ]
+      },
+      {
+        "line_index": 6,
+        "line_type": "added",
+        "old_doc_line_num": null,
+        "new_doc_line_num": 16,
+        "content": "+ - **AST Drift Verifier (`VisualAssetConsistencyVerifier`):** Lập chỉ mục `ClassDef`, `FunctionDef`, `@router` và kiểm tra chiều gọi hàm.",
+        "evidence_ids": [
+          "EV-02"
+        ]
+      },
+      {
+        "line_index": 7,
+        "line_type": "context",
+        "old_doc_line_num": 14,
+        "new_doc_line_num": 17,
+        "content": "- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ sơ đồ.",
+        "evidence_ids": []
+      }
+    ],
+    "mapping_links": [
+      {
+        "link_id": "LNK-01",
+        "evidence_id": "EV-01",
+        "code_file_path": "backend/app/api/multimodal.py",
+        "code_line_indices": [
+          3,
+          4,
+          5
+        ],
+        "doc_line_indices": [
+          4,
+          5
+        ],
+        "rationale": "Khớp trực tiếp route decorator @router.post('/verify-consistency') và tham số repo_path với đặc tả API mới trong tài liệu.",
+        "confidence": 0.99
+      },
+      {
+        "link_id": "LNK-02",
+        "evidence_id": "EV-02",
+        "code_file_path": "backend/app/services/visual_consistency_service.py",
+        "code_line_indices": [
+          8,
+          9
+        ],
+        "doc_line_indices": [
+          6
+        ],
+        "rationale": "Ánh xạ định nghĩa lớp VisualAssetConsistencyVerifier sang mục mô tả cơ chế AST Drift Verifier.",
+        "confidence": 0.97
+      },
+      {
+        "link_id": "LNK-03",
+        "evidence_id": "EV-03",
+        "code_file_path": "backend/app/services/vision_context_extractor_service.py",
+        "code_line_indices": [
+          11,
+          12
+        ],
+        "doc_line_indices": [
+          2,
+          3
+        ],
+        "rationale": "Thay thế chữ ký hàm cũ bằng chữ ký mới hỗ trợ filename và content_type cho tài liệu PDF.",
+        "confidence": 0.98
+      }
+    ],
+    "evidences": [
+      {
+        "evidence_id": "EV-01",
+        "claim_summary": "Bổ sung endpoint POST /api/v1/multimodal/verify-consistency nhận tệp sơ đồ và tham số repo_path.",
+        "symbol_name": "POST /api/v1/multimodal/verify-consistency",
+        "symbol_kind": "endpoint",
+        "file_path": "backend/app/api/multimodal.py",
+        "start_line": 70,
+        "end_line": 78,
+        "commit_hash": "5f9e0dff3a42a8085301a2020bbe884dae887594",
+        "commit_short": "5f9e0dff",
+        "commit_message": "chore: update backend and frontend",
+        "commit_author": "tienndq546498-beep",
+        "commit_date": "2026-11-25 04:36:42 +0700",
+        "branch": "main",
+        "code_snippet": "@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)\nasync def verify_visual_code_consistency(file: UploadFile, repo_path: str = ''):",
+        "doc_patch_excerpt": "POST /api/v1/multimodal/verify-consistency: Đối chiếu đồ thị kiến trúc trực quan với mã nguồn thật.",
+        "repo_grounding_status": "VERIFIED_IN_REPO",
+        "repo_actual_excerpt": "  70 | \n  71 | @router.post(\"/verify-consistency\", response_model=VisualCodeConsistencyResponse)\n  72 | async def verify_visual_code_consistency(\n  73 |     file: UploadFile = File(...),\n  74 |     context_hint: str = Form(default=\"\"),\n  75 |     repo_path: str = Form(default=\"\"),\n  76 | ):\n  77 |     \"\"\"\n  78 |     FE05.3 - Visual Asset - Code Consistency Verification Pipeline",
+        "reviewer_status": "pending",
+        "reviewer_note": ""
+      },
+      {
+        "evidence_id": "EV-02",
+        "claim_summary": "Lớp VisualAssetConsistencyVerifier phân tích AST để lập chỉ mục lớp, hàm và tuyến định tuyến.",
+        "symbol_name": "VisualAssetConsistencyVerifier._index_repository_ast",
+        "symbol_kind": "class",
+        "file_path": "backend/app/services/visual_consistency_service.py",
+        "start_line": 17,
+        "end_line": 25,
+        "commit_hash": "5f9e0dff3a42a8085301a2020bbe884dae887594",
+        "commit_short": "5f9e0dff",
+        "commit_message": "chore: update backend and frontend",
+        "commit_author": "tienndq546498-beep",
+        "commit_date": "2026-11-25 04:36:42 +0700",
+        "branch": "main",
+        "code_snippet": "class VisualAssetConsistencyVerifier:\n    def _index_repository_ast(self, repo_root: Path) -> Dict[str, Any]:",
+        "doc_patch_excerpt": "AST Drift Verifier (VisualAssetConsistencyVerifier): Lập chỉ mục ClassDef, FunctionDef, @router và kiểm tra chiều gọi hàm.",
+        "repo_grounding_status": "VERIFIED_IN_REPO",
+        "repo_actual_excerpt": "  17 | \n  18 | class VisualAssetConsistencyVerifier:\n  19 |     \"\"\"\n  20 |     FE05.3 - Visual Asset - Code Consistency Verification Pipeline\n  21 |     Kết nối đầu ra đồ thị & khẳng định kiến trúc từ FE05.2 (VisionContextExtractor)\n  22 |     với bộ lập chỉ mục mã nguồn thật (Python AST + API Route Scanner) để phát hiện Drift.\n  23 |     \"\"\"\n  24 | \n  25 |     IGNORED_DIRS: Set[str] = {",
+        "reviewer_status": "pending",
+        "reviewer_note": ""
+      },
+      {
+        "evidence_id": "EV-03",
+        "claim_summary": "Mở rộng chữ ký hàm extract_context() nhận thêm filename và content_type để xử lý PDF đa trang.",
+        "symbol_name": "VisionContextExtractor.extract_context",
+        "symbol_kind": "function",
+        "file_path": "backend/app/services/vision_context_extractor_service.py",
+        "start_line": 31,
+        "end_line": 39,
+        "commit_hash": "5f9e0dff3a42a8085301a2020bbe884dae887594",
+        "commit_short": "5f9e0dff",
+        "commit_message": "chore: update backend and frontend",
+        "commit_author": "tienndq546498-beep",
+        "commit_date": "2026-11-25 04:36:42 +0700",
+        "branch": "main",
+        "code_snippet": "async def extract_context(self, file_bytes: bytes, filename: str = 'diagram.png', content_type: str = 'image/png'):",
+        "doc_patch_excerpt": "VisionContextExtractor.extract_context(file_bytes, filename, content_type): Hỗ trợ ảnh kỹ thuật và tài liệu PDF đa trang.",
+        "repo_grounding_status": "VERIFIED_IN_REPO",
+        "repo_actual_excerpt": "  31 | \n  32 |     async def extract_context(\n  33 |         self,\n  34 |         file_bytes: bytes,\n  35 |         filename: str,\n  36 |         content_type: str = \"\",\n  37 |         context_hint: str = \"\",\n  38 |     ) -> VisionContextExtractionResponse:\n  39 |         # 1. Chạy FE05.1 OCR Engine để lấy nền tảng văn bản chuẩn hóa & thực thể kỹ thuật",
+        "reviewer_status": "pending",
+        "reviewer_note": ""
+      }
+    ],
+    "grounding_coverage_score": 100.0,
+    "verified_count": 0,
+    "flagged_count": 0,
+    "pending_count": 3
+  },
+  "gd_adf15f13": {
+    "session_id": "gd_adf15f13",
+    "preset_id": "live_fe05_multimodal",
+    "title": "PR #42 • Đồng bộ tài liệu Pipeline Kiểm chứng Kiến trúc FE05.3 (Live Repo Grounding)",
+    "repo_name": "cnpm-groupgaugau1-2026/LivingDocs",
+    "branch": "main",
+    "commit_hash": "5f9e0dff3a42a8085301a2020bbe884dae887594",
+    "pr_number": 42,
+    "target_doc_path": "docs/architecture/multimodal_pipeline.md",
+    "source_code_files": [
+      "backend/app/api/multimodal.py",
+      "backend/app/services/visual_consistency_service.py",
+      "backend/app/services/vision_context_extractor_service.py"
+    ],
+    "code_diff_lines": [
+      {
+        "line_index": 0,
+        "line_type": "hunk_header",
+        "old_line_num": null,
+        "new_line_num": null,
+        "content": "diff --git a/backend/app/api/multimodal.py b/backend/app/api/multimodal.py",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 1,
+        "line_type": "hunk_header",
+        "old_line_num": null,
+        "new_line_num": null,
+        "content": "@@ -70,4 +70,11 @@ router = APIRouter(prefix='/api/v1/multimodal')",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 2,
+        "line_type": "context",
+        "old_line_num": 70,
+        "new_line_num": 70,
+        "content": "    return await vision_extractor.extract_context(file_bytes, filename=file.filename)",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 3,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 71,
+        "content": "+@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": [
+          "EV-01"
+        ]
+      },
+      {
+        "line_index": 4,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 72,
+        "content": "+async def verify_visual_code_consistency(file: UploadFile, repo_path: str = ''):",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": [
+          "EV-01"
+        ]
+      },
+      {
+        "line_index": 5,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 73,
+        "content": "+    return await consistency_verifier.verify_consistency(file_bytes, repo_path=repo_path)",
+        "file_path": "backend/app/api/multimodal.py",
+        "evidence_ids": [
+          "EV-01"
+        ]
+      },
+      {
+        "line_index": 6,
+        "line_type": "hunk_header",
+        "old_line_num": null,
+        "new_line_num": null,
+        "content": "diff --git a/backend/app/services/visual_consistency_service.py b/backend/app/services/visual_consistency_service.py",
+        "file_path": "backend/app/services/visual_consistency_service.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 7,
+        "line_type": "hunk_header",
+        "old_line_num": null,
+        "new_line_num": null,
+        "content": "@@ -17,2 +17,8 @@ AST & Route Indexer",
+        "file_path": "backend/app/services/visual_consistency_service.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 8,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 17,
+        "content": "+class VisualAssetConsistencyVerifier:",
+        "file_path": "backend/app/services/visual_consistency_service.py",
+        "evidence_ids": [
+          "EV-02"
+        ]
+      },
+      {
+        "line_index": 9,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 18,
+        "content": "+    def _index_repository_ast(self, repo_root: Path) -> Dict[str, Any]:",
+        "file_path": "backend/app/services/visual_consistency_service.py",
+        "evidence_ids": [
+          "EV-02"
+        ]
+      },
+      {
+        "line_index": 10,
+        "line_type": "hunk_header",
+        "old_line_num": null,
+        "new_line_num": null,
+        "content": "diff --git a/backend/app/services/vision_context_extractor_service.py b/backend/app/services/vision_context_extractor_service.py",
+        "file_path": "backend/app/services/vision_context_extractor_service.py",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 11,
+        "line_type": "removed",
+        "old_line_num": 31,
+        "new_line_num": null,
+        "content": "-    async def extract_context(self, file_bytes: bytes) -> VisionContextResponse:",
+        "file_path": "backend/app/services/vision_context_extractor_service.py",
+        "evidence_ids": [
+          "EV-03"
+        ]
+      },
+      {
+        "line_index": 12,
+        "line_type": "added",
+        "old_line_num": null,
+        "new_line_num": 31,
+        "content": "+    async def extract_context(self, file_bytes: bytes, filename: str = 'diagram.png', content_type: str = 'image/png'):",
+        "file_path": "backend/app/services/vision_context_extractor_service.py",
+        "evidence_ids": [
+          "EV-03"
+        ]
+      }
+    ],
+    "doc_patch_lines": [
+      {
+        "line_index": 0,
+        "line_type": "hunk_header",
+        "old_doc_line_num": null,
+        "new_doc_line_num": null,
+        "content": "@@ -12,6 +12,13 @@ docs/architecture/multimodal_pipeline.md",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 1,
+        "line_type": "context",
+        "old_doc_line_num": 12,
+        "new_doc_line_num": 12,
+        "content": "## 2. Danh sách API Endpoints & Kiến trúc Xử lý (FE05)",
+        "evidence_ids": []
+      },
+      {
+        "line_index": 2,
+        "line_type": "removed",
+        "old_doc_line_num": 13,
+        "new_doc_line_num": null,
+        "content": "- - `VisionContextExtractor.extract_context(file_bytes)`: Chỉ hỗ trợ ảnh đơn lẻ.",
+        "evidence_ids": [
+          "EV-03"
+        ]
+      },
+      {
+        "line_index": 3,
+        "line_type": "added",
+        "old_doc_line_num": null,
+        "new_doc_line_num": 13,
+        "content": "+ - `VisionContextExtractor.extract_context(file_bytes, filename, content_type)`: Hỗ trợ ảnh kỹ thuật và tài liệu PDF đa trang.",
+        "evidence_ids": [
+          "EV-03"
+        ]
+      },
+      {
+        "line_index": 4,
+        "line_type": "added",
+        "old_doc_line_num": null,
+        "new_doc_line_num": 14,
+        "content": "+ - `POST /api/v1/multimodal/verify-consistency`: Đối chiếu đồ thị kiến trúc trực quan với mã nguồn thật.",
+        "evidence_ids": [
+          "EV-01"
+        ]
+      },
+      {
+        "line_index": 5,
+        "line_type": "added",
+        "old_doc_line_num": null,
+        "new_doc_line_num": 15,
+        "content": "+   - Tham số tùy chọn `repo_path` cho phép quét cây thư mục repository tùy chỉnh.",
+        "evidence_ids": [
+          "EV-01"
+        ]
+      },
+      {
+        "line_index": 6,
+        "line_type": "added",
+        "old_doc_line_num": null,
+        "new_doc_line_num": 16,
+        "content": "+ - **AST Drift Verifier (`VisualAssetConsistencyVerifier`):** Lập chỉ mục `ClassDef`, `FunctionDef`, `@router` và kiểm tra chiều gọi hàm.",
+        "evidence_ids": [
+          "EV-02"
+        ]
+      },
+      {
+        "line_index": 7,
+        "line_type": "context",
+        "old_doc_line_num": 14,
+        "new_doc_line_num": 17,
+        "content": "- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ sơ đồ.",
+        "evidence_ids": []
+      }
+    ],
+    "mapping_links": [
+      {
+        "link_id": "LNK-01",
+        "evidence_id": "EV-01",
+        "code_file_path": "backend/app/api/multimodal.py",
+        "code_line_indices": [
+          3,
+          4,
+          5
+        ],
+        "doc_line_indices": [
+          4,
+          5
+        ],
+        "rationale": "Khớp trực tiếp route decorator @router.post('/verify-consistency') và tham số repo_path với đặc tả API mới trong tài liệu.",
+        "confidence": 0.99
+      },
+      {
+        "link_id": "LNK-02",
+        "evidence_id": "EV-02",
+        "code_file_path": "backend/app/services/visual_consistency_service.py",
+        "code_line_indices": [
+          8,
+          9
+        ],
+        "doc_line_indices": [
+          6
+        ],
+        "rationale": "Ánh xạ định nghĩa lớp VisualAssetConsistencyVerifier sang mục mô tả cơ chế AST Drift Verifier.",
+        "confidence": 0.97
+      },
+      {
+        "link_id": "LNK-03",
+        "evidence_id": "EV-03",
+        "code_file_path": "backend/app/services/vision_context_extractor_service.py",
+        "code_line_indices": [
+          11,
+          12
+        ],
+        "doc_line_indices": [
+          2,
+          3
+        ],
+        "rationale": "Thay thế chữ ký hàm cũ bằng chữ ký mới hỗ trợ filename và content_type cho tài liệu PDF.",
+        "confidence": 0.98
+      }
+    ],
+    "evidences": [
+      {
+        "evidence_id": "EV-01",
+        "claim_summary": "Bổ sung endpoint POST /api/v1/multimodal/verify-consistency nhận tệp sơ đồ và tham số repo_path.",
+        "symbol_name": "POST /api/v1/multimodal/verify-consistency",
+        "symbol_kind": "endpoint",
+        "file_path": "backend/app/api/multimodal.py",
+        "start_line": 70,
+        "end_line": 78,
+        "commit_hash": "5f9e0dff3a42a8085301a2020bbe884dae887594",
+        "commit_short": "5f9e0dff",
+        "commit_message": "chore: update backend and frontend",
+        "commit_author": "tienndq546498-beep",
+        "commit_date": "2026-11-25 04:36:42 +0700",
+        "branch": "main",
+        "code_snippet": "@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)\nasync def verify_visual_code_consistency(file: UploadFile, repo_path: str = ''):",
+        "doc_patch_excerpt": "POST /api/v1/multimodal/verify-consistency: Đối chiếu đồ thị kiến trúc trực quan với mã nguồn thật.",
+        "repo_grounding_status": "VERIFIED_IN_REPO",
+        "repo_actual_excerpt": "  70 | \n  71 | @router.post(\"/verify-consistency\", response_model=VisualCodeConsistencyResponse)\n  72 | async def verify_visual_code_consistency(\n  73 |     file: UploadFile = File(...),\n  74 |     context_hint: str = Form(default=\"\"),\n  75 |     repo_path: str = Form(default=\"\"),\n  76 | ):\n  77 |     \"\"\"\n  78 |     FE05.3 - Visual Asset - Code Consistency Verification Pipeline",
+        "reviewer_status": "pending",
+        "reviewer_note": ""
+      },
+      {
+        "evidence_id": "EV-02",
+        "claim_summary": "Lớp VisualAssetConsistencyVerifier phân tích AST để lập chỉ mục lớp, hàm và tuyến định tuyến.",
+        "symbol_name": "VisualAssetConsistencyVerifier._index_repository_ast",
+        "symbol_kind": "class",
+        "file_path": "backend/app/services/visual_consistency_service.py",
+        "start_line": 17,
+        "end_line": 25,
+        "commit_hash": "5f9e0dff3a42a8085301a2020bbe884dae887594",
+        "commit_short": "5f9e0dff",
+        "commit_message": "chore: update backend and frontend",
+        "commit_author": "tienndq546498-beep",
+        "commit_date": "2026-11-25 04:36:42 +0700",
+        "branch": "main",
+        "code_snippet": "class VisualAssetConsistencyVerifier:\n    def _index_repository_ast(self, repo_root: Path) -> Dict[str, Any]:",
+        "doc_patch_excerpt": "AST Drift Verifier (VisualAssetConsistencyVerifier): Lập chỉ mục ClassDef, FunctionDef, @router và kiểm tra chiều gọi hàm.",
+        "repo_grounding_status": "VERIFIED_IN_REPO",
+        "repo_actual_excerpt": "  17 | \n  18 | class VisualAssetConsistencyVerifier:\n  19 |     \"\"\"\n  20 |     FE05.3 - Visual Asset - Code Consistency Verification Pipeline\n  21 |     Kết nối đầu ra đồ thị & khẳng định kiến trúc từ FE05.2 (VisionContextExtractor)\n  22 |     với bộ lập chỉ mục mã nguồn thật (Python AST + API Route Scanner) để phát hiện Drift.\n  23 |     \"\"\"\n  24 | \n  25 |     IGNORED_DIRS: Set[str] = {",
+        "reviewer_status": "pending",
+        "reviewer_note": ""
+      },
+      {
+        "evidence_id": "EV-03",
+        "claim_summary": "Mở rộng chữ ký hàm extract_context() nhận thêm filename và content_type để xử lý PDF đa trang.",
+        "symbol_name": "VisionContextExtractor.extract_context",
+        "symbol_kind": "function",
+        "file_path": "backend/app/services/vision_context_extractor_service.py",
+        "start_line": 31,
+        "end_line": 39,
+        "commit_hash": "5f9e0dff3a42a8085301a2020bbe884dae887594",
+        "commit_short": "5f9e0dff",
+        "commit_message": "chore: update backend and frontend",
+        "commit_author": "tienndq546498-beep",
+        "commit_date": "2026-11-25 04:36:42 +0700",
+        "branch": "main",
+        "code_snippet": "async def extract_context(self, file_bytes: bytes, filename: str = 'diagram.png', content_type: str = 'image/png'):",
+        "doc_patch_excerpt": "VisionContextExtractor.extract_context(file_bytes, filename, content_type): Hỗ trợ ảnh kỹ thuật và tài liệu PDF đa trang.",
+        "repo_grounding_status": "VERIFIED_IN_REPO",
+        "repo_actual_excerpt": "  31 | \n  32 |     async def extract_context(\n  33 |         self,\n  34 |         file_bytes: bytes,\n  35 |         filename: str,\n  36 |         content_type: str = \"\",\n  37 |         context_hint: str = \"\",\n  38 |     ) -> VisionContextExtractionResponse:\n  39 |         # 1. Chạy FE05.1 OCR Engine để lấy nền tảng văn bản chuẩn hóa & thực thể kỹ thuật",
+        "reviewer_status": "pending",
+        "reviewer_note": ""
+      }
+    ],
+    "grounding_coverage_score": 100.0,
+    "verified_count": 0,
+    "flagged_count": 0,
+    "pending_count": 3
   }
 }
