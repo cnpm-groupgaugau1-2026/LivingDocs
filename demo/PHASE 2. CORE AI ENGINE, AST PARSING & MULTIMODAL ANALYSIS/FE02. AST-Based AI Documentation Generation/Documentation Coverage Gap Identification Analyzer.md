@@ -53,6 +53,7 @@ def format_summary(self, total, status="OK"):
 1. Phân tích chi tiết từng thực thể & Cách tính điểm
 
 Khi bấm phân tích, hệ thống quét toàn bộ 30 dòng mã, trích xuất **5 thực thể AST** (`3` đã có docstring -\> **Độ phủ: **`60%`) và sắp xếp **3 lỗ hổng** theo thứ tự ưu tiên giảm dần:
+ - ![Demo Frontend](/docs/images/a5.png)
 
 - `BillingReconciler.reconcile_batch`** (**`Dòng 8–21`**) -\> Cảnh báo **`HIGH`** (**`Complexity: 6`**)**
     - **Cách tính điểm phức tạp (**`6`**):** Điểm gốc (`1`) + `if not transactions` (`+1`) + `for tx in transactions` (`+1`) + `if tx.get(...)` (`+1`) + `if strict_mode` (`+1`) + `while attempt < max_retries` (`+1`).
@@ -65,3 +66,4 @@ Khi bấm phân tích, hệ thống quét toàn bộ 30 dòng mã, trích xuất
 - ** Hai thực thể đạt chuẩn (**`BillingReconciler`** & **`validate_currency`**):** Cả hai đều có docstring đầy đủ, riêng `validate_currency` có trọn vẹn `code: str -> bool` nên không xuất hiện trong danh sách cảnh báo.
 
 1. Kịch bản vá lỗi để đưa độ phủ về 100% & Xóa sạch cảnh báo
+2.  - ![Demo Frontend](/docs/images/a6.png)
