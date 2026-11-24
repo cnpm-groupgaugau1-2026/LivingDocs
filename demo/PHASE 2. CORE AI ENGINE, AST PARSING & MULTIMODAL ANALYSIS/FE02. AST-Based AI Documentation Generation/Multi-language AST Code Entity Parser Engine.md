@@ -6,10 +6,12 @@
 - **Hỗ trợ đa ngôn ngữ trên một đầu ra thống nhất:** Dù đầu vào là **Python** (`.py`), **JavaScript** (`.js`, `.jsx`) hay **TypeScript** (`.ts`, `.tsx`), engine đều chuẩn hóa kết quả về cùng một cấu trúc dữ liệu `ASTParseResponse`.
 
 Truy cập `http://localhost:3000`, bấm nút `✨ Sinh tài liệu AI (AST)` trên thanh công cụ trình soạn thảo và chọn tab `Dán / Tải tệp Code` (hoặc mở Swagger UI tại `http://localhost:8000/docs` với endpoint `POST /api/v1/doc-generation/parse`) để thực hiện kịch bản kiểm thử 4 bước dưới đây.
+ - ![Demo Frontend](/docs/images/a7.png)
 
 Bước 1: Phân tích cú pháp Python & Bóc tách quan hệ Class – Method
 
 Trên cột cấu hình bên trái của cửa sổ phân tích, nhập thông tin cho một service Python mẫu để kiểm tra khả năng nhận diện ngôn ngữ và cấu trúc phân cấp lớp – phương thức:
+ - ![Demo Frontend](/docs/images/a8.png)
 
 
 - **Tổng thực thể AST (**`3`**):** Bộ phân tích Tree-sitter đã quét toàn bộ tệp và nhận diện được đúng 3 khối cấu trúc chính gồm 1 lớp (`PaymentGateway`) và 2 phương thức (`charge`, `refund`).
@@ -30,11 +32,13 @@ Trên cột cấu hình bên trái của cửa sổ phân tích, nhập thông t
 
       
 - Nếu chúng ta thử thêm dòng `"""Hoàn tiền giao dịch."""` và sửa dòng 12 thành `def refund(self, transaction_id: str) -> bool:` rồi bấm lại **Phân tích AST & Độ phủ**, chỉ số **Độ phủ tài liệu** sẽ tăng lên **100%** và danh sách **Thực thể thiếu tài liệu** sẽ trống hoàn toàn.
+-  - ![Demo Frontend](/docs/images/a9.png)
 
 
 Bước 2: Chuyển đổi đa ngôn ngữ sang TypeScript & Bóc tách JSDoc / Arrow Function
 
 Thay đổi sang mã nguồn TypeScript để kiểm chứng cơ chế tự động chuyển bộ ngữ pháp sang `tree-sitter-typescript` và chuẩn hóa đầu ra thống nhất:
+ - ![Demo Frontend](/docs/images/a10.png)
 
 Kết quả trên màn hình cho thấy **AST Parser Engine** đã tự động chuyển sang bộ ngữ pháp **TypeScript** (dựa vào đuôi `.ts`), đọc thành công chuẩn bình luận **JSDoc** và bóc tách chính xác cú pháp **Arrow Function** hiện đại.
 
@@ -55,10 +59,12 @@ Toàn bộ phần thiếu sót được khoanh vùng chính xác vào hàm mũi 
 - **Không xuất hiện cảnh báo **`LOW`** như bên Python:** Khác với hàm `refund` lúc trước bị nhắc thiếu kiểu trả về, hàm `extractBearer` đã khai báo đầy đủ kiểu tham số (`authHeader?: string`) và kiểu trả về (`: string | null`), nên hệ thống chỉ yêu cầu bổ sung khối JSDoc mô tả mục đích hàm và tham số `authHeader`.
 
 Nếu chúng ta thêm  khối `/** Trích xuất chuỗi token từ header Authorization. */` ngay phía trên dòng 14 và bấm **Phân tích AST & Độ phủ**, độ phủ của tệp TypeScript này sẽ đạt **100%**.
+ - ![Demo Frontend](/docs/images/a11.png)
 
 Bước 3: Kiểm thử JavaScript & Đo lường độ phức tạp nhánh (Cyclomatic Complexity)
 
 Thử nghiệm với tệp JavaScript thuần (`.js`) chứa nhiều cấu trúc rẽ nhánh lồng nhau để kiểm tra bộ tính điểm độ phức tạp logic:
+ - ![Demo Frontend](/docs/images/a12.png)
 
 Kết quả trên màn hình cho thấy **AST Parser Engine** đã tự động chuyển sang bộ ngữ pháp **JavaScript** (dựa vào đuôi `.js`)
 
@@ -82,12 +88,15 @@ Bước 4: Kiểm thử nạp trực tiếp tệp mã nguồn từ GitHub Worksp
 Để kiểm thử luồng nạp trực tiếp mã nguồn từ **GitHub Workspace** (tự động quét cây thư mục repository qua GitHub API, lọc đúng các tệp ngôn ngữ hỗ trợ AST và tải nội dung về bộ phân tích).
 
 -Chọn hoặc bổ sung tệp mã nguồn vào Repository GitHub
+ - ![Demo Frontend](/docs/images/a13.png)
 
 -Nạp tệp từ GitHub Workspace vào khung phân tích AST
+ - ![Demo Frontend](/docs/images/a14.png)
 
 -Chạy phân tích và đối chiếu kết quả
 
 Hệ thống đã quét thành công cây thư mục từ repository `tienndq546498-beep/tmttmm` và hiển thị tệp `services/order_service.py [python]` trong danh sách thả xuống, nhưng nội dung phân tích hiện tại vẫn đang chạy trên tệp mẫu mặc định (`app/services/payment_processor.py`) do chưa bấm nút `Nạp`.
+ - ![Demo Frontend](/docs/images/a15.png)
 
 
 ### \*Giải thích kết quả đang hiển thị trên màn hình
@@ -105,6 +114,7 @@ Do khung mã nguồn bên dưới vẫn giữ nội dung của tệp mẫu `app/
 -Quan sát dòng chữ xanh `Tệp:` phía trên khung nhập liệu đổi từ `app/services/payment_processor.py` sang `services/order_service.py` và nội dung bên trong cập nhật thành lớp `OrderService`.
 
 -Bấm lại nút `Phân tích AST & Độ phủ` ở góc dưới bên trái để xem kết quả bóc tách 3 thực thể (`OrderService`, `create_order`, `cancel_order`) từ tệp vừa tải về qua GitHub API.
+ - ![Demo Frontend](/docs/images/a16.png)
 
 
 ### Kết quả đối chiếu từ tệp GitHub thực tế
