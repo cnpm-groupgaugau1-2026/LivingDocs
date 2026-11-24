@@ -30,7 +30,8 @@ from app.api.v1.admin_integrations import router as admin_integrations_router
 from app.api.v1.admin_ai_config import router as admin_ai_config_router
 from app.api.drift_detection import router as drift_router
 from app.api.multimodal import router as multimodal_router
-
+from app.api import multimodal, auto_doc
+from app.api import multimodal, auto_doc, grounding_diff
 
 # ==============================================================================
 # --- DATABASE MODELS (DOCUMENT & WEBHOOK INGESTION LOGS) ---
@@ -75,6 +76,13 @@ app = FastAPI(
 )
 app.include_router(drift_router)
 app.include_router(multimodal_router)
+# ... (các cấu hình CORS và middleware hiện có của bạn) ...
+
+app.include_router(multimodal.router)
+app.include_router(auto_doc.router)
+app.include_router(multimodal.router)
+app.include_router(auto_doc.router)
+app.include_router(grounding_diff.router)
 
 app.add_middleware(
     CORSMiddleware,

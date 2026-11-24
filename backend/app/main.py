@@ -19,6 +19,10 @@ from app.api.v1.admin_integrations import router as admin_integrations_router
 from app.api.v1.admin_ai_config import router as admin_ai_config_router
 from app.api.drift_detection import router as drift_router
 from app.api.multimodal import router as multimodal_router
+from app.api import multimodal, auto_doc
+
+
+
 
 # Tự động khởi tạo toàn bộ bảng (bao gồm bảng của FE13) trong PostgreSQL khi server khởi động
 Base.metadata.create_all(bind=engine)
@@ -28,6 +32,13 @@ app = FastAPI(
     version="2.0.0",
     description="Hệ thống RESTful API kết nối PostgreSQL với phân quyền 5 Actor & GitHub Workspace",
 )
+# ... (các cấu hình CORS và middleware hiện có của bạn) ...
+
+app.include_router(multimodal.router)
+app.include_router(auto_doc.router)
+app.include_router(multimodal.router)
+app.include_router(auto_doc.router)
+app.include_router(grounding_diff.router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -378,7 +389,16 @@ async def commit_document_to_github(
         "html_url": file_url,
     }
 from app.api.v1 import admin_ai_config
-from app.db.database import Base, engine
 
-Base.metadata.create_all(bind=engine)  # Đảm bảo bảng ai_engine_configs được tạo
+from app.api import multimodal, auto_doc, grounding_diff
+
+app.include_router(multimodal.router)
+app.include_router(auto_doc.router)
+app.include_router(grounding_diff.router)
+
+try:
+    from app.db.database import Base, engine
+    Base.metadata.create_all(bind=engine)
+except ImportError:
+    pass
 app.include_router(admin_ai_config.router, prefix="/api/v1")
