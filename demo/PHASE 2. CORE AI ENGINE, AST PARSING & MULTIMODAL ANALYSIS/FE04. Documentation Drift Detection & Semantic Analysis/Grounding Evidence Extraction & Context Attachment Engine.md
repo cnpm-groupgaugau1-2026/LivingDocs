@@ -13,13 +13,14 @@ Trên giao diện, mỗi thẻ lỗi sẽ được gắn 1 trong **3 trạng th�
 **Bước 1 — Kiểm tra tổng quan tỷ lệ neo bằng chứng ở Kịch bản 1 (**`1. Tổng hợp cả 3 loại Drift`**):**
 
 - Nhìn lên góc trên bên phải của thẻ thống kê (`5.3 Grounding Anchors`).
+- ![Demo Frontend](/docs/images/b1)
 
 - **Kết quả :** Hệ thống báo `Đã neo: 6/6 • Neo kép AST: 5` (5 lỗi của hàm `process_payment` neo được cả hai đầu Tài liệu ↔ AST, còn 1 lỗi của hàm đã xóa `legacy_reconcile_invoice` chỉ neo ở phía Tài liệu)
 
 **Bước 2 — Kiểm tra khả năng "soi tận dòng lệnh AST" trên từng thẻ lỗi:**
 
 - Kéo xuống **thẻ số 1 (**`CRITICAL • 89/100`** — Mâu thuẫn hành vi **`read-only`**)**, nhìn vào khung tối màu **Bằng chứng AST** bên phải của phần `5.3 Grounding Evidence`.
-
+![Demo Frontend](/docs/images/b2)
 - **Kết quả :** Dù cả hàm `process_payment` dài 5 dòng, hệ thống vẫn khoanh sáng riêng **dòng 4** (`db.save_transaction(...)`) kèm nhãn `Node Proof: ast.Call(func='db.save_transaction', lineno=4)` và dòng chú thích giải thích ngay bên dưới.
 - Kéo tiếp xuống **thẻ số 4 (**`HIGH • 69/100`** — Thiếu mô tả ngoại lệ)**: khung bằng chứng AST tự động đổi sang khoanh sáng **dòng 3** (`raise ValueError(...)`) với `Node Proof: ast.Raise(exc='ValueError', lineno=3)`.
 
