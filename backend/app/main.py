@@ -17,6 +17,8 @@ from app.models.ai_engine_config import AiEngineConfig  # noqa: F401
 from app.api.v1.admin_users import router as admin_users_router
 from app.api.v1.admin_integrations import router as admin_integrations_router
 from app.api.v1.admin_ai_config import router as admin_ai_config_router
+from app.api.drift_detection import router as drift_router
+from app.api.multimodal import router as multimodal_router
 
 # Tự động khởi tạo toàn bộ bảng (bao gồm bảng của FE13) trong PostgreSQL khi server khởi động
 Base.metadata.create_all(bind=engine)
@@ -34,7 +36,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+app.include_router(drift_router)
+app.include_router(multimodal_router)
 
 # ==============================================================================
 # --- PYDANTIC SCHEMAS ---
