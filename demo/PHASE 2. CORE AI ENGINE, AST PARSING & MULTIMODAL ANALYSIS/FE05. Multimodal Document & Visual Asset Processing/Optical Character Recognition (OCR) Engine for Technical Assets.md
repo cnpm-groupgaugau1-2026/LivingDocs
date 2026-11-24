@@ -13,12 +13,14 @@ Hệ thống xử lý qua **3 tầng tự động**:
 **Bước 1 — Kiểm tra trạng thái năng lực OCR của Backend:**
 
 - Mở nhanh tab mới tới `http://localhost:8000/api/v1/multimodal/health`.
+- ![Demo Frontend](/docs/images/c1.png)
 
 - **Kết quả :** API trả về JSON liệt kê rõ trạng thái từng thành phần trên máy bạn (`pillow_available`, `pytesseract_available`, `tesseract_binary_found`, `pypdf_available`, `gemini_vision_ocr_configured`).
 
 **Bước 2 — Kiểm tra sơ đồ kiến trúc mặc định (**`1. Sơ đồ Kiến trúc Microservices`**):**
 
 - Quay lại `http://localhost:3000/multimodal-demo`, quan sát 4 thẻ thông số phía trên và 2 khung đối chiếu bên dưới.
+- ![Demo Frontend](/docs/images/c2.png)
 
 
 - **Kết quả :**
@@ -38,20 +40,25 @@ Hệ thống xử lý qua **3 tầng tự động**:
 
 - Bấm lần lượt vào nút **2. Lưu đồ Xác thực Token** và **3. Sơ đồ Đồng bộ Repository** trên thanh công cụ.
 - **Kết quả :**
+- ![Demo Frontend](/docs/images/c3.png)
 - 
     - Ở mẫu số 2, hệ thống tự nhận diện loại tài liệu chuyển sang `flowchart`, trích xuất đúng tên hàm lỗi thời `verify_access_token()` và hàm `audit_inactive_users()` (dữ liệu mồi để FE05.3 bắt lỗi sai lệch với code ở bước sau).
+    - ![Demo Frontend](/docs/images/c4.png)
 - 
     - Ở mẫu số 3, hệ thống trích xuất đúng chuỗi luồng `WebhookHandler -> RepoService` và `RepoService -> DriftEngine`.
 
 **Bước 4 — Kiểm tra văn bản chuẩn hóa đầu ra cho FE05.2:**
 
 - Kéo xuống khung tối màu **Văn bản OCR đã chuẩn hóa** ở cuối trang.
+- ![Demo Frontend](/docs/images/c5.png)
 
 - **Kết quả :** Toàn bộ nội dung đọc được từ ảnh đã được làm sạch khoảng trắng, chuẩn hóa ký hiệu mũi tên `->` và sẵn sàng làm đầu vào cho tầng **Vision-LLM Context Extractor (FE05.2)**.
 
 **Bước 5 — Kiểm thử tải lên tệp PDF hoặc ảnh thật từ máy tính:**
 
 - Bấm nút xanh `Tải lên Ảnh / PDF thật` ở góc trên bên phải và chọn một tệp `.pdf` tài liệu kỹ thuật nhiều trang (hoặc ảnh chụp màn hình sơ đồ `.png`/`.jpg` bất kỳ trên máy).
+- ![Demo Frontend](/docs/images/c6.png)
+- ![Demo Frontend](/docs/images/c7.png)
 
 
 - **Kết quả :** Nếu là PDF có lớp văn bản, `Engine` tự chuyển sang `pypdf_native_text_layer`, tách từng trang (`--- Page 1 ---`, `--- Page 2 ---`) và tự động lọc ra toàn bộ tên hàm, đường dẫn tệp, endpoint có trong tài liệu PDF đó.
