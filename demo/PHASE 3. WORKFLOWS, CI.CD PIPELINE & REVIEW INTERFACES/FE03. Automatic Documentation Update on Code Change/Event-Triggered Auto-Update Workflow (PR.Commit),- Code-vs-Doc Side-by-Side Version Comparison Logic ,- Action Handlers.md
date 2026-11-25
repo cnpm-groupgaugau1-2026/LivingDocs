@@ -12,17 +12,18 @@
 
 - **Bước 1 — Kiểm tra Endpoint Backend trên Swagger UI (**`http://localhost:8000/docs`**):**
     - Mở nhóm `auto-doc-update` -\> chọn `POST /api/v1/auto-doc/trigger` -\> bấm **Try it out** -\> giữ nguyên payload mặc định và bấm **Execute**.
-- ![Demo Frontend](/docs/images/fe03-1.png)
+- ![Demo Frontend](/docs/images/fe3-1.png)
     - **Kết quả :** API trả về mã `200 OK` với JSON `AutoDocWorkflowResponse` chứa `workflow_id`, `engine_used`, `current_published_version` (`v1.0`), `active_draft_version` (`v1.1-draft`), mảng `side_by_side_diff` và `version_history`.
 - **Bước 2 — Kiểm thử sự kiện Pull Request (**`1. PR #42: Bổ sung FE05.3 Consistency Endpoint`**):**
     - Trên trang `http://localhost:3000/auto-doc-update`, quan sát kết quả mặc định của mẫu số 1 (hoặc bấm lại nút `1. PR #42`).
-- ![Demo Frontend](/docs/images/fe03-2.png)
+- ![Demo Frontend](/docs/images/fe3-2.png)
     - **Kết quả :**
         - Hàng KPI hiển thị sự kiện `PR #42` (`feat/fe05-3-consistency • @minh-dev`), phiên bản hiện hành `v1.0`, bản nháp chờ duyệt `v1.1-draft` và `3 symbols` thay đổi được phát hiện.
         - Khung **Phân tích tác động sang tài liệu** liệt kê đầy đủ 3 mục bổ sung (`VisualAssetConsistencyVerifier`, `verify_consistency(...)`, `POST /verify-consistency`).
         - Bảng **Side-by-Side Diff** tô xanh toàn bộ các dòng đặc tả mới ở cột phải (`v1.1-draft`) đối chiếu trực tiếp với cột trái (`v1.0`).
 - **Bước 3 — Kiểm thử sự kiện Git Commit Refactor (**`2. Commit a7f102b: Refactor hàm & đổi phiên bản API`**):**
     - Bấm chọn nút `2. Commit a7f102b: Refactor hàm & đổi phiên bản API` trên thanh **FE03.1**.
+      ![Demo Frontend](/docs/images/fe3-3.png)
 - 
     - **Kết quả:**
         - Thẻ **Sự kiện kích hoạt** chuyển sang `Commit a7f102b` (`main • @lan-backend`) nhắm tới tệp `docs/services/billing_service.md`.
@@ -31,15 +32,22 @@
 - **Bước 4 — Kiểm thử quét Git Diff thật từ Repository (**`3. Quét Git Diff thật từ Repo D:\CNPM\LivingDocs`**) & GitHub Webhook:**
     - Bấm chọn nút `3. Quét Git Diff thật từ Repo D:\CNPM\LivingDocs` để kích hoạt lệnh `git diff HEAD~1 -- backend/app` trực tiếp trên mã nguồn dự án của bạn.
     - Ngoài ra, có thể thử thêm endpoint `POST /api/v1/auto-doc/github-webhook` trên Swagger UI với header `x-github-event: pull_request` để kiểm tra luồng nhận webhook chuẩn từ GitHub.
+      ![Demo Frontend](/docs/images/fe3-4.png)
 - 
     - **Kết quả :** Khung **Mã nguồn thay đổi (Git Diff Trigger)** hiển thị đúng đoạn diff thực tế từ commit gần nhất trong repository cục bộ và tự động sinh bản nháp cập nhật tương ứng.
 - **Bước 5 — Kiểm tra tính toàn vẹn xuyên suốt quy trình (**`FE03.1 Trigger`** \<-\>**`FE03.2 Diff`** \<-\> **`FE03.3 Actions`**):**
     - Trên cùng một workflow đang mở, thao tác lần lượt thanh công cụ **FE03.3 • Kiểm duyệt phiên bản**:
+      ![Demo Frontend](/docs/images/fe3-5.png)
     - 
         - Bấm `✎ Edit Draft` -\>sửa nội dung Markdown và bấm **Lưu chỉnh sửa & Cập nhật Diff** (bảng Side-by-Side tính lại diff ngay lập tức).
+          ![Demo Frontend](/docs/images/fe3-6.png)
     - 
         - Bấm `↻ Regenerate` -\> nhập chỉ dẫn bổ sung (ví dụ: *"Thêm ví dụ cURL"*) và bấm **Chạy Regenerate**.
+          ![Demo Frontend](/docs/images/fe3-7.png)
     - 
         - Bấm `✓ Accept Draft` -\> bản nháp `v1.1-draft` được nâng cấp thành phiên bản chính thức `v1.1`** (**`published`**)**.
+          ![Demo Frontend](/docs/images/fe3-9.png)
     - 
         - Tại bảng **Lịch sử phiên bản tài liệu & Rollback** bên dưới, bấm `↺ Rollback về v1.0` -\> hệ thống tạo mốc `v1.2` khôi phục nguyên vẹn nội dung `v1.0` và ghi xuống tệp `backend/data/fe03_doc_workflows.json` (nhấn `F5` tải lại trang vẫn giữ nguyên lịch sử).
+          ![Demo Frontend](/docs/images/fe3-10.png)
+          ![Demo Frontend](/docs/images/fe3-11.png)
