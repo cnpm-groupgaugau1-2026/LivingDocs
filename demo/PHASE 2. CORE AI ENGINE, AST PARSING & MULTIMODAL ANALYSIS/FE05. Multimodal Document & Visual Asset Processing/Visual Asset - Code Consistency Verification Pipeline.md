@@ -41,7 +41,11 @@
 - **Bước 4 — Kiểm thử đối chiếu Tài liệu Đặc tả PDF Đa trang:**
     - Bấm nút `Tải lên Ảnh / PDF thật` ở góc trên bên phải và chọn tệp `LivingDocs Architecture & API Specification.pdf` (tài liệu đặc tả 3 trang).
     - **Kết quả :**
-    - 
+    - ![Demo Frontend](/docs/images/fe05-8.png)
+ 
+    - ![Demo Frontend](/docs/images/fe05-9.png)
+ 
+    - ![Demo Frontend](/docs/images/fe05-10.png)
         - Hệ thống chạy nối tiếp **FE05.1 (tách 3 trang PDF)** -\> **FE05.2 (hợp nhất đồ thị đa trang & 12 claims)** -\> **FE05.3 (đối chiếu cả 12 claims với AST mã nguồn)**.
         - Những claims trùng khớp với các service/endpoint thật trong `backend/app/` hiện `CONSISTENT`, các claims mô tả module mở rộng chưa triển khai hiện `UNVERIFIED` kèm bằng chứng đối chiếu chi tiết.
 - **Bước 5 — Kiểm tra tính toàn vẹn xuyên suốt 3 phân hệ (**`FE05.1 OCR`** -\>**`FE05.2 Vision Graph`** -\> **`FE05.3 Drift Check`**):**
