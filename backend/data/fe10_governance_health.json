@@ -1,0 +1,142 @@
+{
+  "documents": [
+    {
+      "doc_id": "doc-review-workflow",
+      "title": "Governed 2-Tier Review Workflow (FE07)",
+      "doc_path": "docs/features/fe07-review-workflow.md",
+      "module": "review",
+      "freshness_days": 3,
+      "freshness_threshold_days": 14,
+      "coverage_pct": 96.0,
+      "drift_status": "clean",
+      "drift_reason": null,
+      "last_updated_at": "2026-11-25T10:51:12.851749+00:00"
+    },
+    {
+      "doc_id": "doc-ci-policy",
+      "title": "CI/CD Pipeline & PR Merge Policy (FE06)",
+      "doc_path": "docs/features/fe06-ci-policy.md",
+      "module": "ci-cd",
+      "freshness_days": 18,
+      "freshness_threshold_days": 14,
+      "coverage_pct": 84.0,
+      "drift_status": "critical",
+      "drift_reason": "PR merge policy thresholds updated without refreshing runbook docs.",
+      "last_updated_at": "2026-11-25T10:51:12.851749+00:00"
+    },
+    {
+      "doc_id": "doc-version-audit",
+      "title": "Role-Attributed Version Audit Trail (FE08)",
+      "doc_path": "docs/features/fe08-version-audit.md",
+      "module": "audit",
+      "freshness_days": 9,
+      "freshness_threshold_days": 14,
+      "coverage_pct": 91.5,
+      "drift_status": "warning",
+      "drift_reason": "Rollback payload fields added; verify sequence diagram.",
+      "last_updated_at": "2026-11-25T10:51:12.851749+00:00"
+    },
+    {
+      "doc_id": "doc-governance-health",
+      "title": "Documentation Governance & Health Analytics (FE10)",
+      "doc_path": "docs/features/fe10-governance-health.md",
+      "module": "governance",
+      "freshness_days": 2,
+      "freshness_threshold_days": 14,
+      "coverage_pct": 94.0,
+      "drift_status": "clean",
+      "drift_reason": null,
+      "last_updated_at": "2026-11-25T10:51:12.851749+00:00"
+    }
+  ],
+  "nodes": [
+    {
+      "node_id": "code-review-api",
+      "label": "review_workflow.py",
+      "kind": "code",
+      "path": "backend/app/api/review_workflow.py",
+      "module": "review"
+    },
+    {
+      "node_id": "code-ci-service",
+      "label": "ci_policy_service.py",
+      "kind": "code",
+      "path": "backend/app/services/ci_policy_service.py",
+      "module": "ci-cd"
+    },
+    {
+      "node_id": "code-audit-service",
+      "label": "version_audit_service.py",
+      "kind": "code",
+      "path": "backend/app/services/version_audit_service.py",
+      "module": "audit"
+    },
+    {
+      "node_id": "svc-governance",
+      "label": "GovernanceHealthService",
+      "kind": "service",
+      "path": "backend/app/services/governance_health_service.py",
+      "module": "governance"
+    },
+    {
+      "node_id": "doc-review-workflow",
+      "label": "fe07-review-workflow.md",
+      "kind": "doc",
+      "path": "docs/features/fe07-review-workflow.md",
+      "module": "review"
+    },
+    {
+      "node_id": "doc-ci-policy",
+      "label": "fe06-ci-policy.md",
+      "kind": "doc",
+      "path": "docs/features/fe06-ci-policy.md",
+      "module": "ci-cd"
+    },
+    {
+      "node_id": "doc-version-audit",
+      "label": "fe08-version-audit.md",
+      "kind": "doc",
+      "path": "docs/features/fe08-version-audit.md",
+      "module": "audit"
+    },
+    {
+      "node_id": "doc-governance-health",
+      "label": "fe10-governance-health.md",
+      "kind": "doc",
+      "path": "docs/features/fe10-governance-health.md",
+      "module": "governance"
+    }
+  ],
+  "edges": [
+    {
+      "source": "code-review-api",
+      "target": "doc-review-workflow",
+      "relation": "documents"
+    },
+    {
+      "source": "code-ci-service",
+      "target": "doc-ci-policy",
+      "relation": "documents"
+    },
+    {
+      "source": "code-audit-service",
+      "target": "doc-version-audit",
+      "relation": "documents"
+    },
+    {
+      "source": "code-ci-service",
+      "target": "svc-governance",
+      "relation": "impacts"
+    },
+    {
+      "source": "code-audit-service",
+      "target": "svc-governance",
+      "relation": "depends_on"
+    },
+    {
+      "source": "svc-governance",
+      "target": "doc-governance-health",
+      "relation": "documents"
+    }
+  ]
+}

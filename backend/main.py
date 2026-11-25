@@ -952,3 +952,7 @@ app.include_router(ci_policy.router)
 from app.api import version_audit
 
 app.include_router(version_audit.router)
+
+from app.api import governance_health
+
+app.include_router(governance_health.router)
