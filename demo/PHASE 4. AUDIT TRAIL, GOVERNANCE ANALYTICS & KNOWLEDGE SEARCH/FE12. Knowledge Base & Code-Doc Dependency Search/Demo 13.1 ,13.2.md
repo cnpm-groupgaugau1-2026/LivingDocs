@@ -10,7 +10,7 @@
 ### bản demo kiểm thử FE12
 
 - **Bước 1 — Kiểm tra Endpoint & Tìm Kiếm Hybrid Khởi Tạo (13.1):** Mở `http://localhost:8000/docs` (nhóm `fe12-knowledge-search`) gọi `GET /api/v1/knowledge-search/search?q=drift&mode=hybrid` hoặc mở `http://localhost:3000/knowledge-search`.
-- ![Demo Frontend](/docs/images/d12.png)
+- ![Demo Frontend](/docs/images/fe12-1.png)
 - 
     - *Kết quả mong đợi:* Trả về `200 OK` với danh sách kết quả kèm `score`, `keyword_score`, `semantic_score`, `rag_context`, và trang `/knowledge-search` hiển thị danh sách kết quả mặc định.
 - **Bước 2 — Đổi Chế Độ Tìm Kiếm & Lọc Collection (13.1):** Trên trang `/knowledge-search`, nhập từ khóa (ví dụ `rollback` hoặc `policy`), đổi chế độ từ `Hybrid` sang `Semantic Vector` hoặc `Keyword`, và chọn một `Collection` (ví dụ `ci-cd`, `audit`, `governance`).
