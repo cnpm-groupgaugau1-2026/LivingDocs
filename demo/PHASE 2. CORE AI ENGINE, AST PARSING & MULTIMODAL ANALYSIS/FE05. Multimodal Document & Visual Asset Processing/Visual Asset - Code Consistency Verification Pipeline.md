@@ -33,6 +33,10 @@
     - ![Demo Frontend](/docs/images/fe05-4.png)
  
     - ![Demo Frontend](/docs/images/fe05-5.png)
+ 
+    - ![Demo Frontend](/docs/images/fe05-6.png)
+ 
+    - ![Demo Frontend](/docs/images/fe05-7.png)
         - Các thành phần nghiệp vụ giả định chưa có trong repo hiện tại (`BillingService`, `TransactionDB`, `SessionCache`, `POST /api/v1/billing/charge`) được phân loại rõ ràng thành `UNVERIFIED` hoặc `DRIFTED` (nếu trùng từ khóa gần giống với hàm hiện có trong repo), kèm hộp **Đề xuất xử lý** hướng dẫn bổ sung code hoặc cập nhật lại sơ đồ.
 - **Bước 4 — Kiểm thử đối chiếu Tài liệu Đặc tả PDF Đa trang:**
     - Bấm nút `Tải lên Ảnh / PDF thật` ở góc trên bên phải và chọn tệp `LivingDocs Architecture & API Specification.pdf` (tài liệu đặc tả 3 trang).
