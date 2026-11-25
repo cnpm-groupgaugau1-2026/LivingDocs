@@ -396,3 +396,7 @@ app.include_router(version_audit.router)
 from app.api import governance_health
 
 app.include_router(governance_health.router)
+
+from app.api import knowledge_search
+
+app.include_router(knowledge_search.router)

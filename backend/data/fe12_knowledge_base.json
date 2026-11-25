@@ -1,0 +1,185 @@
+{
+  "items": [
+    {
+      "item_id": "doc-fe06-ci",
+      "title": "FE06 CI/CD Pipeline & PR Merge Policy Runbook",
+      "kind": "document",
+      "entity_type": "runbook",
+      "collection": "ci-cd",
+      "path": "docs/features/fe06-ci-policy.md",
+      "content": "Evaluates pull request documentation drift against protected code paths. Supports warn and block merge modes, severity thresholds, and override labels such as docs-drift-waived inside GitHub Actions.",
+      "tags": [
+        "ci-cd",
+        "drift",
+        "merge-policy",
+        "github-actions"
+      ],
+      "linked_items": [
+        {
+          "target_id": "code-ci-policy-svc",
+          "label": "ci_policy_service.py",
+          "kind": "code_entity",
+          "path": "backend/app/services/ci_policy_service.py",
+          "relation": "implemented_by"
+        },
+        {
+          "target_id": "code-ci-policy-page",
+          "label": "ci-policy/page.tsx",
+          "kind": "code_entity",
+          "path": "frontend/src/app/ci-policy/page.tsx",
+          "relation": "referenced_in"
+        }
+      ],
+      "updated_at": "2026-11-25T11:37:08.592802+00:00"
+    },
+    {
+      "item_id": "code-ci-policy-svc",
+      "title": "ci_policy_service.py",
+      "kind": "code_entity",
+      "entity_type": "service",
+      "collection": "ci-cd",
+      "path": "backend/app/services/ci_policy_service.py",
+      "content": "Service class evaluating PR changed_files, detected_severity, and labels against protected_paths and doc_paths to emit allow, warn, or block with exit_code.",
+      "tags": [
+        "python",
+        "service",
+        "evaluate-pr",
+        "policy"
+      ],
+      "linked_items": [
+        {
+          "target_id": "doc-fe06-ci",
+          "label": "FE06 CI/CD Pipeline & PR Merge Policy Runbook",
+          "kind": "document",
+          "path": "docs/features/fe06-ci-policy.md",
+          "relation": "documents"
+        }
+      ],
+      "updated_at": "2026-11-25T11:37:08.592802+00:00"
+    },
+    {
+      "item_id": "code-ci-policy-page",
+      "title": "ci-policy/page.tsx",
+      "kind": "code_entity",
+      "entity_type": "page",
+      "collection": "ci-cd",
+      "path": "frontend/src/app/ci-policy/page.tsx",
+      "content": "Next.js workbench for configuring warn/block merge policies, simulating PR drift evaluations, and inspecting CI run history.",
+      "tags": [
+        "nextjs",
+        "ui",
+        "ci-policy"
+      ],
+      "linked_items": [
+        {
+          "target_id": "doc-fe06-ci",
+          "label": "FE06 CI/CD Pipeline & PR Merge Policy Runbook",
+          "kind": "document",
+          "path": "docs/features/fe06-ci-policy.md",
+          "relation": "documents"
+        }
+      ],
+      "updated_at": "2026-11-25T11:37:08.592802+00:00"
+    },
+    {
+      "item_id": "doc-fe08-audit",
+      "title": "FE08 Role-Attributed Version Audit & Rollback Spec",
+      "kind": "document",
+      "entity_type": "specification",
+      "collection": "audit",
+      "path": "docs/features/fe08-version-audit.md",
+      "content": "Maintains tamper-evident SHA-256 hash-chained document versions attributed to AI, Staff, or Manager roles with triggering commit hashes and full rollback.",
+      "tags": [
+        "audit-trail",
+        "sha256",
+        "rollback",
+        "role-attribution"
+      ],
+      "linked_items": [
+        {
+          "target_id": "code-version-audit-svc",
+          "label": "version_audit_service.py",
+          "kind": "code_entity",
+          "path": "backend/app/services/version_audit_service.py",
+          "relation": "implemented_by"
+        }
+      ],
+      "updated_at": "2026-11-25T11:37:08.592802+00:00"
+    },
+    {
+      "item_id": "code-version-audit-svc",
+      "title": "version_audit_service.py",
+      "kind": "code_entity",
+      "entity_type": "service",
+      "collection": "audit",
+      "path": "backend/app/services/version_audit_service.py",
+      "content": "Implements append_version, rollback_version, and verify_chain using SHA-256 prev_hash chaining and role attribution (AI, Staff, Manager).",
+      "tags": [
+        "python",
+        "service",
+        "rollback",
+        "verify-chain"
+      ],
+      "linked_items": [
+        {
+          "target_id": "doc-fe08-audit",
+          "label": "FE08 Role-Attributed Version Audit & Rollback Spec",
+          "kind": "document",
+          "path": "docs/features/fe08-version-audit.md",
+          "relation": "documents"
+        }
+      ],
+      "updated_at": "2026-11-25T11:37:08.592802+00:00"
+    },
+    {
+      "item_id": "doc-fe10-health",
+      "title": "FE10 Governance Health, Impact Graph & Compliance Guide",
+      "kind": "document",
+      "entity_type": "guide",
+      "collection": "governance",
+      "path": "docs/features/fe10-governance-health.md",
+      "content": "Aggregates document freshness, coverage, and drift status, traverses dependency graphs for impact analysis, and exports Markdown or JSON compliance reports.",
+      "tags": [
+        "governance",
+        "freshness",
+        "coverage",
+        "impact-graph"
+      ],
+      "linked_items": [
+        {
+          "target_id": "code-governance-svc",
+          "label": "governance_health_service.py",
+          "kind": "code_entity",
+          "path": "backend/app/services/governance_health_service.py",
+          "relation": "implemented_by"
+        }
+      ],
+      "updated_at": "2026-11-25T11:37:08.592802+00:00"
+    },
+    {
+      "item_id": "code-governance-svc",
+      "title": "governance_health_service.py",
+      "kind": "code_entity",
+      "entity_type": "service",
+      "collection": "governance",
+      "path": "backend/app/services/governance_health_service.py",
+      "content": "Computes health metrics, runs BFS impact traversal across dependency nodes/edges, and generates Markdown or JSON compliance exports.",
+      "tags": [
+        "python",
+        "service",
+        "impact-analysis",
+        "export"
+      ],
+      "linked_items": [
+        {
+          "target_id": "doc-fe10-health",
+          "label": "FE10 Governance Health, Impact Graph & Compliance Guide",
+          "kind": "document",
+          "path": "docs/features/fe10-governance-health.md",
+          "relation": "documents"
+        }
+      ],
+      "updated_at": "2026-11-25T11:37:08.592802+00:00"
+    }
+  ]
+}
