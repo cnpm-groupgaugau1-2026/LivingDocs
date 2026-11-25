@@ -11,14 +11,21 @@
 ### bản demo kiểm thử FE10
 
 - **Bước 1 — Kiểm tra Endpoint & Tổng Quan Dữ Liệu Khởi Tạo (12.2):** Mở `http://localhost:8000/docs` (nhóm `fe10-governance-health`) gọi `GET /api/v1/governance-health/overview` hoặc truy cập `http://localhost:3000/governance-health`.
-- 
+ ![Demo Frontend](/docs/images/fe10-1.png)
+
     - *Kết quả mong đợi:* Trả về `200 OK` với `metrics`, `documents`, `nodes`, `edges`, và giao diện `/governance-health` hiển thị 4 thẻ chỉ số tổng hợp cùng danh sách tài liệu.
 - **Bước 2 — Lọc Trạng Thái Drift & Đối Chiếu Chỉ Số (12.1 & 12.2):** Trên trang `/governance-health`, tại mục **12.2 Freshness, Coverage & Drift Metrics theo tài liệu**, đổi bộ lọc từ `Tất cả trạng thái drift` sang `critical`, `warning`, hoặc `clean`.
-- 
+   ![Demo Frontend](/docs/images/fe10-2.png)
+   ![Demo Frontend](/docs/images/fe10-3.png)
+   ![Demo Frontend](/docs/images/fe10-4.png)
+  
     - *Kết quả mong đợi:* Danh sách tài liệu lọc đúng theo trạng thái được chọn, hiển thị rõ `module`, `age`, ngưỡng ngày, `coverage` và lý do drift (nếu có).
 - **Bước 3 — Phân Tích Tác Động Trên Dependency Graph (12.3):** Tại khung **12.3 Code-Doc Dependency Impact Graph**, bấm chọn các node khác nhau (ví dụ `code-ci-service`, `code-audit-service`, hoặc `doc-governance-health`).
-- 
+   ![Demo Frontend](/docs/images/fe10-5.png)
+  
     - *Kết quả mong đợi:* Khung phân tích cập nhật tương ứng với node được chọn, liệt kê các node bị ảnh hưởng, tài liệu liên quan và đường dẫn tác động (`->`).
 - **Bước 4 — Xuất Báo Cáo Tuân Thủ Markdown & JSON (12.3):** Tại khung **12.3 Compliance Report Exporter**, bấm **Xuất Markdown**, kiểm tra nội dung xem trước, bấm **Tải file**, sau đó bấm **Xuất JSON** để đối chiếu.
-- 
+   ![Demo Frontend](/docs/images/fe10-6.png)
+   ![Demo Frontend](/docs/images/fe10-7.png)
+  
     - *Kết quả mong đợi:* Vùng xem trước hiển thị đầy đủ báo cáo tuân thủ theo đúng định dạng `markdown` hoặc `json` và tải xuống tệp tương ứng (`livingdocs-fe10-compliance-report.md` hoặc `.json`).
