@@ -10,30 +10,35 @@
 **Bước 1 — Kiểm tra Endpoint Backend & Trạng thái Khởi tạo:**Swagger UI tại <http://localhost:8000/docs>.
 
 Mở `http://localhost:8000/docs`, tìm nhóm `fe07-review-workflow`, chọn `GET /api/v1/review-workflow/items`, bấm **Try it out** rồi bấm **Execute**.
+![Demo Frontend](/docs/images/d7.png)
 
 *Verification:* Phản hồi trả về `200 OK` với danh sách hồ sơ chứa item mẫu `rev-fe07-001` (`stage: "staff_queue"`, danh sách `template_sections`, `checks` và `comments`).
 
 **Bước 2 — Kiểm thử 9.1 Staff Verification (Template & Code Check):**Cột 9.1 trên 
 
 Trên giao diện `/review-workflow`, chọn item đang ở `staff_queue` và bấm **Chạy kiểm tra Template & Code**.
+![Demo Frontend](/docs/images/d8.png)
 
 *Verification:* Các dòng kiểm tra section xuất hiện dưới nút bấm với trạng thái `PASS` (xanh) hoặc `FAIL` (đỏ), không báo lỗi kết nối tới backend `8000`.
 
 **Bước 3 — Kiểm thử 9.2 Section Comments & Ràng buộc Resolved:**Cột 9.2 trên 
 
 Thử bấm **Chuyển tiếp lên Manager** khi vẫn còn comment đang `Open`, sau đó nhập tên section và nội dung nhận xét mới, bấm **Thêm Section Comment**, rồi bấm **Đánh dấu Resolved** cho các comment cần đóng.
+![Demo Frontend](/docs/images/d9.png)
 
 *Verification:* Khi còn comment `Open`, hệ thống báo lỗi chặn chuyển tiếp; sau khi bấm **Đánh dấu Resolved**, trạng thái comment đổi sang `Resolved` và bộ đếm `Open Comments` giảm tương ứng.
 
 **Bước 4 — Kiểm thử Luồng Request Changes (Trả lại chỉnh sửa):**Cột 9.2 trên 
 
 Nhập lý do vào ô **Lý do yêu cầu chỉnh sửa (Request Changes)...** và bấm **Trả lại yêu cầu chỉnh sửa (Request Changes)**.
+![Demo Frontend](/docs/images/d10.png)
 
 *Verification:* `Stage` của hồ sơ chuyển sang `changes_requested` và lý do được lưu thành một comment mới trong danh sách.
 
 **Bước 5 — Kiểm thử 9.3 Manager Approval & Automated Commit/Publishing:**Cột 9.3 trên 
 
 Đảm bảo không còn comment `Open` và các check đạt yêu cầu, bấm **Chuyển tiếp lên Manager** (`manager_approval`), nhập ghi chú rồi bấm **Approve** (`approved`), sau đó bấm **Commit & Publish**.
+![Demo Frontend](/docs/images/d11.png)
 
 
 *Verification:* Trạng thái đi lần lượt qua `manager_approval` -\> `approved` -\> `published`, và khung **Published commit** hiển thị mã commit cùng thời điểm xuất bản.
