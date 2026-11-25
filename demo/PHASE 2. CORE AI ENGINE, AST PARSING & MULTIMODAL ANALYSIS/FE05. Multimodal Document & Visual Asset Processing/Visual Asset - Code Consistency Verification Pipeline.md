@@ -21,7 +21,7 @@
 - **Bước 2 — Kiểm thử đối chiếu mã nguồn thật (**`4. Kiến trúc LivingDocs Multimodal (Live Code)`**):**
     - Trên trang `http://localhost:3000/multimodal-demo`, quan sát kết quả mặc định của mẫu số 4 (`livingdocs_multimodal_pipeline.png`).
     - **Kết quả :**
-    - 
+    - ![Demo Frontend](/docs/images/fe05-2.png)
         - Hàng KPI hiển thị phạm vi quét toàn bộ dự án (`scanned_files_count` và hàng trăm `classes / functions / routes` đã lập chỉ mục), kèm điểm nhất quán tổng thể (**Consistency Score**).
         - Các khẳng định về hàm và API thật của dự án như `POST /api/v1/multimodal/ocr`, `VisionContextExtractor` (`extract_context()`), `TechnicalAssetOcrEngine` (`extract_from_bytes()`), `VisualAssetConsistencyVerifier` (`verify_consistency()`) và luồng gọi `VisionContextExtractor` -\> `TechnicalAssetOcrEngine` đều hiển thị nhãn xanh `CONSISTENT` kèm khung đen **Code Evidence** trỏ đúng dòng code thật (`app/api/multimodal.py`, `app/services/vision_context_extractor_service.py`, `app/services/ocr_engine_service.py`, `app/services/visual_consistency_service.py`).
     - 
