@@ -1,0 +1,71 @@
+name: FE06 - LivingDocs CI & Merge Policy Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+    branches: [main]
+
+jobs:
+  doc-drift-policy-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Collect changed files and evaluate PR merge policy
+        id: policy
+        shell: bash
+        env:
+          API_URL: ${{ vars.LIVINGDOCS_API_URL || 'http://localhost:8000' }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
+        run: |
+          CHANGED_JSON=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" | python3 -c '
+          import json, sys
+          files = [line.strip() for line in sys.stdin if line.strip()]
+          print(json.dumps(files))
+          ')
+
+          python3 - << 'PY'
+          import json, os, urllib.request
+
+          api_url = os.environ["API_URL"].rstrip("/")
+          payload = {
+              "repo": os.environ.get("GITHUB_REPOSITORY", "livingdocs/repo"),
+              "pr_number": int(os.environ["PR_NUMBER"]),
+              "base_sha": os.environ["BASE_SHA"],
+              "head_sha": os.environ["HEAD_SHA"],
+              "changed_files": json.loads(os.environ["CHANGED_JSON"]),
+              "labels": json.loads(os.environ["PR_LABELS"]),
+              "detected_severity": "critical",
+          }
+
+          req = urllib.request.Request(
+              f"{api_url}/api/v1/ci-policy/evaluate-pr",
+              data=json.dumps(payload).encode("utf-8"),
+              headers={"Content-Type": "application/json"},
+              method="POST",
+          )
+          with urllib.request.urlopen(req, timeout=15) as resp:
+              result = json.loads(resp.read().decode("utf-8"))
+
+          print("Decision:", result["decision"])
+          print("Reason:", result["reason"])
+
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
+              f.write(f"### FE06 Merge Policy Result: `{result['decision'].upper()}`\n")
+              f.write(f"- **PR:** #{result['pr_number']}\n")
+              f.write(f"- **Severity:** `{result['detected_severity']}`\n")
+              f.write(f"- **Reason:** {result['reason']}\n")
+
+          raise SystemExit(int(result["exit_code"]))
+          PY

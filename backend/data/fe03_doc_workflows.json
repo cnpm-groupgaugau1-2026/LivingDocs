@@ -420,5 +420,467 @@
         "change_summary": "Đã tự động cập nhật 4 thành phần mới và gỡ 0 mục lỗi thời theo sự kiện PR #42 (8c3d91a)."
       }
     ]
+  },
+  "wf_97c563e5": {
+    "workflow_id": "wf_97c563e5",
+    "event_type": "pull_request",
+    "repo_name": "cnpm-groupgaugau1-2026/LivingDocs",
+    "branch": "feat/fe05-3-consistency",
+    "commit_sha": "8c3d91a",
+    "pr_number": 42,
+    "pr_title": "feat(multimodal): add VisualAssetConsistencyVerifier & /verify-consistency",
+    "author": "minh-dev",
+    "target_doc_path": "docs/architecture/multimodal_pipeline.md",
+    "code_diff": "@@ -24,6 +24,14 @@ class VisualAssetConsistencyVerifier:\n+class VisualAssetConsistencyVerifier:\n+    async def verify_consistency(file_bytes: bytes, filename: str, repo_path: str = ''):\n+@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)\n+async def verify_visual_code_consistency(file: UploadFile, repo_path: str = ''):",
+    "engine_used": "ast_diff_doc_synthesizer",
+    "current_published_version": {
+      "version_id": "ver_7f503e8a",
+      "version_number": "v1.0",
+      "content": "# Tài liệu Kỹ thuật: docs/architecture/multimodal_pipeline.md\n\n## 1. Tổng quan Kiến trúc Multimodal (FE05)\nHệ thống xử lý tài liệu kỹ thuật trực quan gồm 2 phân hệ đã phát hành:\n- **FE05.1 OCR Engine:** `TechnicalAssetOcrEngine.extract_from_bytes()` trích xuất token từ sơ đồ và PDF.\n- **FE05.2 Vision-LLM Context Extractor:** `VisionContextExtractor.extract_context()` tái dựng đồ thị kiến trúc có hướng.\n\n## 2. Danh sách API Endpoints hiện hành\n- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ ảnh/PDF.\n- `POST /api/v1/multimodal/extract-context`: Tái dựng đồ thị Nodes, Edges và Architectural Claims.",
+      "created_at": "2026-11-24 21:31:01 UTC",
+      "author": "initial_seed",
+      "trigger_ref": "baseline",
+      "status": "published",
+      "change_summary": "Phiên bản tài liệu gốc trước khi có thay đổi mã nguồn."
+    },
+    "active_draft_version": {
+      "version_id": "ver_d2d76dab",
+      "version_number": "v1.1-draft",
+      "content": "# Tài liệu Kỹ thuật: docs/architecture/multimodal_pipeline.md\n\n## 1. Tổng quan Kiến trúc Multimodal (FE05)\nHệ thống xử lý tài liệu kỹ thuật trực quan gồm 2 phân hệ đã phát hành:\n- **FE05.1 OCR Engine:** `TechnicalAssetOcrEngine.extract_from_bytes()` trích xuất token từ sơ đồ và PDF.\n- **FE05.2 Vision-LLM Context Extractor:** `VisionContextExtractor.extract_context()` tái dựng đồ thị kiến trúc có hướng.\n\n## 2. Danh sách API Endpoints hiện hành\n- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ ảnh/PDF.\n- `POST /api/v1/multimodal/extract-context`: Tái dựng đồ thị Nodes, Edges và Architectural Claims.\n\n## Cập nhật tự động (PR #42 (8c3d91a))\n- **Thành phần kiến trúc (Class):** `VisualAssetConsistencyVerifier`\n- **Hàm xử lý (Function):** `verify_consistency(file_bytes: bytes, filename: str, repo_path: str = '')`\n- **API Endpoint mới:** `POST /verify-consistency` — `@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)`\n- **Hàm xử lý (Function):** `verify_visual_code_consistency(file: UploadFile, repo_path: str = '')`",
+      "created_at": "2026-11-24 22:33:12 UTC",
+      "author": "ai_workflow",
+      "trigger_ref": "PR #42 (8c3d91a)",
+      "status": "draft",
+      "change_summary": "Đã tự động cập nhật 4 thành phần mới và gỡ 0 mục lỗi thời theo sự kiện PR #42 (8c3d91a)."
+    },
+    "comparison": {
+      "code_changes_detected": [
+        {
+          "change_type": "added",
+          "symbol_kind": "class",
+          "signature": "VisualAssetConsistencyVerifier",
+          "detail": "class VisualAssetConsistencyVerifier:"
+        },
+        {
+          "change_type": "added",
+          "symbol_kind": "function",
+          "signature": "verify_consistency(file_bytes: bytes, filename: str, repo_path: str = '')",
+          "detail": "async def verify_consistency(file_bytes: bytes, filename: str, repo_path: str = ''):"
+        },
+        {
+          "change_type": "added",
+          "symbol_kind": "endpoint",
+          "signature": "POST /verify-consistency",
+          "detail": "@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)"
+        },
+        {
+          "change_type": "added",
+          "symbol_kind": "function",
+          "signature": "verify_visual_code_consistency(file: UploadFile, repo_path: str = '')",
+          "detail": "async def verify_visual_code_consistency(file: UploadFile, repo_path: str = ''):"
+        }
+      ],
+      "doc_impact_points": [
+        "Bổ sung đặc tả cho class mới: `VisualAssetConsistencyVerifier`",
+        "Bổ sung đặc tả cho function mới: `verify_consistency(file_bytes: bytes, filename: str, repo_path: str = '')`",
+        "Bổ sung đặc tả cho endpoint mới: `POST /verify-consistency`",
+        "Bổ sung đặc tả cho function mới: `verify_visual_code_consistency(file: UploadFile, repo_path: str = '')`"
+      ],
+      "side_by_side_diff": [
+        {
+          "line_type": "unchanged",
+          "old_line_num": 1,
+          "new_line_num": 1,
+          "old_text": "# Tài liệu Kỹ thuật: docs/architecture/multimodal_pipeline.md",
+          "new_text": "# Tài liệu Kỹ thuật: docs/architecture/multimodal_pipeline.md"
+        },
+        {
+          "line_type": "unchanged",
+          "old_line_num": 2,
+          "new_line_num": 2,
+          "old_text": "",
+          "new_text": ""
+        },
+        {
+          "line_type": "unchanged",
+          "old_line_num": 3,
+          "new_line_num": 3,
+          "old_text": "## 1. Tổng quan Kiến trúc Multimodal (FE05)",
+          "new_text": "## 1. Tổng quan Kiến trúc Multimodal (FE05)"
+        },
+        {
+          "line_type": "unchanged",
+          "old_line_num": 4,
+          "new_line_num": 4,
+          "old_text": "Hệ thống xử lý tài liệu kỹ thuật trực quan gồm 2 phân hệ đã phát hành:",
+          "new_text": "Hệ thống xử lý tài liệu kỹ thuật trực quan gồm 2 phân hệ đã phát hành:"
+        },
+        {
+          "line_type": "unchanged",
+          "old_line_num": 5,
+          "new_line_num": 5,
+          "old_text": "- **FE05.1 OCR Engine:** `TechnicalAssetOcrEngine.extract_from_bytes()` trích xuất token từ sơ đồ và PDF.",
+          "new_text": "- **FE05.1 OCR Engine:** `TechnicalAssetOcrEngine.extract_from_bytes()` trích xuất token từ sơ đồ và PDF."
+        },
+        {
+          "line_type": "unchanged",
+          "old_line_num": 6,
+          "new_line_num": 6,
+          "old_text": "- **FE05.2 Vision-LLM Context Extractor:** `VisionContextExtractor.extract_context()` tái dựng đồ thị kiến trúc có hướng.",
+          "new_text": "- **FE05.2 Vision-LLM Context Extractor:** `VisionContextExtractor.extract_context()` tái dựng đồ thị kiến trúc có hướng."
+        },
+        {
+          "line_type": "unchanged",
+          "old_line_num": 7,
+          "new_line_num": 7,
+          "old_text": "",
+          "new_text": ""
+        },
+        {
+          "line_type": "unchanged",
+          "old_line_num": 8,
+          "new_line_num": 8,
+          "old_text": "## 2. Danh sách API Endpoints hiện hành",
+          "new_text": "## 2. Danh sách API Endpoints hiện hành"
+        },
+        {
+          "line_type": "unchanged",
+          "old_line_num": 9,
+          "new_line_num": 9,
+          "old_text": "- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ ảnh/PDF.",
+          "new_text": "- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ ảnh/PDF."
+        },
+        {
+          "line_type": "unchanged",
+          "old_line_num": 10,
+          "new_line_num": 10,
+          "old_text": "- `POST /api/v1/multimodal/extract-context`: Tái dựng đồ thị Nodes, Edges và Architectural Claims.",
+          "new_text": "- `POST /api/v1/multimodal/extract-context`: Tái dựng đồ thị Nodes, Edges và Architectural Claims."
+        },
+        {
+          "line_type": "added",
+          "old_line_num": null,
+          "new_line_num": 11,
+          "old_text": "",
+          "new_text": ""
+        },
+        {
+          "line_type": "added",
+          "old_line_num": null,
+          "new_line_num": 12,
+          "old_text": "",
+          "new_text": "## Cập nhật tự động (PR #42 (8c3d91a))"
+        },
+        {
+          "line_type": "added",
+          "old_line_num": null,
+          "new_line_num": 13,
+          "old_text": "",
+          "new_text": "- **Thành phần kiến trúc (Class):** `VisualAssetConsistencyVerifier`"
+        },
+        {
+          "line_type": "added",
+          "old_line_num": null,
+          "new_line_num": 14,
+          "old_text": "",
+          "new_text": "- **Hàm xử lý (Function):** `verify_consistency(file_bytes: bytes, filename: str, repo_path: str = '')`"
+        },
+        {
+          "line_type": "added",
+          "old_line_num": null,
+          "new_line_num": 15,
+          "old_text": "",
+          "new_text": "- **API Endpoint mới:** `POST /verify-consistency` — `@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)`"
+        },
+        {
+          "line_type": "added",
+          "old_line_num": null,
+          "new_line_num": 16,
+          "old_text": "",
+          "new_text": "- **Hàm xử lý (Function):** `verify_visual_code_consistency(file: UploadFile, repo_path: str = '')`"
+        }
+      ],
+      "added_lines": 6,
+      "removed_lines": 0,
+      "drift_resolved_count": 4
+    },
+    "version_history": [
+      {
+        "version_id": "ver_7f503e8a",
+        "version_number": "v1.0",
+        "content": "# Tài liệu Kỹ thuật: docs/architecture/multimodal_pipeline.md\n\n## 1. Tổng quan Kiến trúc Multimodal (FE05)\nHệ thống xử lý tài liệu kỹ thuật trực quan gồm 2 phân hệ đã phát hành:\n- **FE05.1 OCR Engine:** `TechnicalAssetOcrEngine.extract_from_bytes()` trích xuất token từ sơ đồ và PDF.\n- **FE05.2 Vision-LLM Context Extractor:** `VisionContextExtractor.extract_context()` tái dựng đồ thị kiến trúc có hướng.\n\n## 2. Danh sách API Endpoints hiện hành\n- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ ảnh/PDF.\n- `POST /api/v1/multimodal/extract-context`: Tái dựng đồ thị Nodes, Edges và Architectural Claims.",
+        "created_at": "2026-11-24 21:31:01 UTC",
+        "author": "initial_seed",
+        "trigger_ref": "baseline",
+        "status": "published",
+        "change_summary": "Phiên bản tài liệu gốc trước khi có thay đổi mã nguồn."
+      },
+      {
+        "version_id": "ver_eea197de",
+        "version_number": "v1.1-draft",
+        "content": "# Tài liệu Kỹ thuật: docs/architecture/multimodal_pipeline.md\n\n## 1. Tổng quan Kiến trúc Multimodal (FE05)\nHệ thống xử lý tài liệu kỹ thuật trực quan gồm 2 phân hệ đã phát hành:\n- **FE05.1 OCR Engine:** `TechnicalAssetOcrEngine.extract_from_bytes()` trích xuất token từ sơ đồ và PDF.\n- **FE05.2 Vision-LLM Context Extractor:** `VisionContextExtractor.extract_context()` tái dựng đồ thị kiến trúc có hướng.\n\n## 2. Danh sách API Endpoints hiện hành\n- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ ảnh/PDF.\n- `POST /api/v1/multimodal/extract-context`: Tái dựng đồ thị Nodes, Edges và Architectural Claims.\n\n## Cập nhật tự động (PR #42 (8c3d91a))\n- **Thành phần kiến trúc (Class):** `VisualAssetConsistencyVerifier`\n- **Hàm xử lý (Function):** `verify_consistency(file_bytes: bytes, filename: str, repo_path: str = '')`\n- **API Endpoint mới:** `POST /verify-consistency` — `@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)`\n- **Hàm xử lý (Function):** `verify_visual_code_consistency(file: UploadFile, repo_path: str = '')`",
+        "created_at": "2026-11-24 21:31:01 UTC",
+        "author": "ai_workflow",
+        "trigger_ref": "PR #42 (8c3d91a)",
+        "status": "draft",
+        "change_summary": "Đã tự động cập nhật 4 thành phần mới và gỡ 0 mục lỗi thời theo sự kiện PR #42 (8c3d91a)."
+      },
+      {
+        "version_id": "ver_6768448d",
+        "version_number": "v1.1-draft",
+        "content": "# Tài liệu Kỹ thuật: docs/architecture/multimodal_pipeline.md\n\n## 1. Tổng quan Kiến trúc Multimodal (FE05)\nHệ thống xử lý tài liệu kỹ thuật trực quan gồm 2 phân hệ đã phát hành:\n- **FE05.1 OCR Engine:** `TechnicalAssetOcrEngine.extract_from_bytes()` trích xuất token từ sơ đồ và PDF.\n- **FE05.2 Vision-LLM Context Extractor:** `VisionContextExtractor.extract_context()` tái dựng đồ thị kiến trúc có hướng.\n\n## 2. Danh sách API Endpoints hiện hành\n- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ ảnh/PDF.\n- `POST /api/v1/multimodal/extract-context`: Tái dựng đồ thị Nodes, Edges và Architectural Claims.\n\n## Cập nhật tự động (PR #42 (8c3d91a))\n- **Thành phần kiến trúc (Class):** `VisualAssetConsistencyVerifier`\n- **Hàm xử lý (Function):** `verify_consistency(file_bytes: bytes, filename: str, repo_path: str = '')`\n- **API Endpoint mới:** `POST /verify-consistency` — `@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)`\n- **Hàm xử lý (Function):** `verify_visual_code_consistency(file: UploadFile, repo_path: str = '')`",
+        "created_at": "2026-11-24 21:31:01 UTC",
+        "author": "ai_workflow",
+        "trigger_ref": "PR #42 (8c3d91a)",
+        "status": "draft",
+        "change_summary": "Đã tự động cập nhật 4 thành phần mới và gỡ 0 mục lỗi thời theo sự kiện PR #42 (8c3d91a)."
+      },
+      {
+        "version_id": "ver_d2d76dab",
+        "version_number": "v1.1-draft",
+        "content": "# Tài liệu Kỹ thuật: docs/architecture/multimodal_pipeline.md\n\n## 1. Tổng quan Kiến trúc Multimodal (FE05)\nHệ thống xử lý tài liệu kỹ thuật trực quan gồm 2 phân hệ đã phát hành:\n- **FE05.1 OCR Engine:** `TechnicalAssetOcrEngine.extract_from_bytes()` trích xuất token từ sơ đồ và PDF.\n- **FE05.2 Vision-LLM Context Extractor:** `VisionContextExtractor.extract_context()` tái dựng đồ thị kiến trúc có hướng.\n\n## 2. Danh sách API Endpoints hiện hành\n- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ ảnh/PDF.\n- `POST /api/v1/multimodal/extract-context`: Tái dựng đồ thị Nodes, Edges và Architectural Claims.\n\n## Cập nhật tự động (PR #42 (8c3d91a))\n- **Thành phần kiến trúc (Class):** `VisualAssetConsistencyVerifier`\n- **Hàm xử lý (Function):** `verify_consistency(file_bytes: bytes, filename: str, repo_path: str = '')`\n- **API Endpoint mới:** `POST /verify-consistency` — `@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)`\n- **Hàm xử lý (Function):** `verify_visual_code_consistency(file: UploadFile, repo_path: str = '')`",
+        "created_at": "2026-11-24 22:33:12 UTC",
+        "author": "ai_workflow",
+        "trigger_ref": "PR #42 (8c3d91a)",
+        "status": "draft",
+        "change_summary": "Đã tự động cập nhật 4 thành phần mới và gỡ 0 mục lỗi thời theo sự kiện PR #42 (8c3d91a)."
+      }
+    ]
+  },
+  "wf_4ef5c85d": {
+    "workflow_id": "wf_4ef5c85d",
+    "event_type": "pull_request",
+    "repo_name": "cnpm-groupgaugau1-2026/LivingDocs",
+    "branch": "feat/fe05-3-consistency",
+    "commit_sha": "8c3d91a",
+    "pr_number": 42,
+    "pr_title": "feat(multimodal): add VisualAssetConsistencyVerifier & /verify-consistency",
+    "author": "minh-dev",
+    "target_doc_path": "docs/architecture/multimodal_pipeline.md",
+    "code_diff": "@@ -24,6 +24,14 @@ class VisualAssetConsistencyVerifier:\n+class VisualAssetConsistencyVerifier:\n+    async def verify_consistency(file_bytes: bytes, filename: str, repo_path: str = ''):\n+@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)\n+async def verify_visual_code_consistency(file: UploadFile, repo_path: str = ''):",
+    "engine_used": "ast_diff_doc_synthesizer",
+    "current_published_version": {
+      "version_id": "ver_7f503e8a",
+      "version_number": "v1.0",
+      "content": "# Tài liệu Kỹ thuật: docs/architecture/multimodal_pipeline.md\n\n## 1. Tổng quan Kiến trúc Multimodal (FE05)\nHệ thống xử lý tài liệu kỹ thuật trực quan gồm 2 phân hệ đã phát hành:\n- **FE05.1 OCR Engine:** `TechnicalAssetOcrEngine.extract_from_bytes()` trích xuất token từ sơ đồ và PDF.\n- **FE05.2 Vision-LLM Context Extractor:** `VisionContextExtractor.extract_context()` tái dựng đồ thị kiến trúc có hướng.\n\n## 2. Danh sách API Endpoints hiện hành\n- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ ảnh/PDF.\n- `POST /api/v1/multimodal/extract-context`: Tái dựng đồ thị Nodes, Edges và Architectural Claims.",
+      "created_at": "2026-11-24 21:31:01 UTC",
+      "author": "initial_seed",
+      "trigger_ref": "baseline",
+      "status": "published",
+      "change_summary": "Phiên bản tài liệu gốc trước khi có thay đổi mã nguồn."
+    },
+    "active_draft_version": {
+      "version_id": "ver_e47ce47b",
+      "version_number": "v1.1-draft",
+      "content": "# Tài liệu Kỹ thuật: docs/architecture/multimodal_pipeline.md\n\n## 1. Tổng quan Kiến trúc Multimodal (FE05)\nHệ thống xử lý tài liệu kỹ thuật trực quan gồm 2 phân hệ đã phát hành:\n- **FE05.1 OCR Engine:** `TechnicalAssetOcrEngine.extract_from_bytes()` trích xuất token từ sơ đồ và PDF.\n- **FE05.2 Vision-LLM Context Extractor:** `VisionContextExtractor.extract_context()` tái dựng đồ thị kiến trúc có hướng.\n\n## 2. Danh sách API Endpoints hiện hành\n- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ ảnh/PDF.\n- `POST /api/v1/multimodal/extract-context`: Tái dựng đồ thị Nodes, Edges và Architectural Claims.\n\n## Cập nhật tự động (PR #42 (8c3d91a))\n- **Thành phần kiến trúc (Class):** `VisualAssetConsistencyVerifier`\n- **Hàm xử lý (Function):** `verify_consistency(file_bytes: bytes, filename: str, repo_path: str = '')`\n- **API Endpoint mới:** `POST /verify-consistency` — `@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)`\n- **Hàm xử lý (Function):** `verify_visual_code_consistency(file: UploadFile, repo_path: str = '')`",
+      "created_at": "2026-11-24 22:33:12 UTC",
+      "author": "ai_workflow",
+      "trigger_ref": "PR #42 (8c3d91a)",
+      "status": "draft",
+      "change_summary": "Đã tự động cập nhật 4 thành phần mới và gỡ 0 mục lỗi thời theo sự kiện PR #42 (8c3d91a)."
+    },
+    "comparison": {
+      "code_changes_detected": [
+        {
+          "change_type": "added",
+          "symbol_kind": "class",
+          "signature": "VisualAssetConsistencyVerifier",
+          "detail": "class VisualAssetConsistencyVerifier:"
+        },
+        {
+          "change_type": "added",
+          "symbol_kind": "function",
+          "signature": "verify_consistency(file_bytes: bytes, filename: str, repo_path: str = '')",
+          "detail": "async def verify_consistency(file_bytes: bytes, filename: str, repo_path: str = ''):"
+        },
+        {
+          "change_type": "added",
+          "symbol_kind": "endpoint",
+          "signature": "POST /verify-consistency",
+          "detail": "@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)"
+        },
+        {
+          "change_type": "added",
+          "symbol_kind": "function",
+          "signature": "verify_visual_code_consistency(file: UploadFile, repo_path: str = '')",
+          "detail": "async def verify_visual_code_consistency(file: UploadFile, repo_path: str = ''):"
+        }
+      ],
+      "doc_impact_points": [
+        "Bổ sung đặc tả cho class mới: `VisualAssetConsistencyVerifier`",
+        "Bổ sung đặc tả cho function mới: `verify_consistency(file_bytes: bytes, filename: str, repo_path: str = '')`",
+        "Bổ sung đặc tả cho endpoint mới: `POST /verify-consistency`",
+        "Bổ sung đặc tả cho function mới: `verify_visual_code_consistency(file: UploadFile, repo_path: str = '')`"
+      ],
+      "side_by_side_diff": [
+        {
+          "line_type": "unchanged",
+          "old_line_num": 1,
+          "new_line_num": 1,
+          "old_text": "# Tài liệu Kỹ thuật: docs/architecture/multimodal_pipeline.md",
+          "new_text": "# Tài liệu Kỹ thuật: docs/architecture/multimodal_pipeline.md"
+        },
+        {
+          "line_type": "unchanged",
+          "old_line_num": 2,
+          "new_line_num": 2,
+          "old_text": "",
+          "new_text": ""
+        },
+        {
+          "line_type": "unchanged",
+          "old_line_num": 3,
+          "new_line_num": 3,
+          "old_text": "## 1. Tổng quan Kiến trúc Multimodal (FE05)",
+          "new_text": "## 1. Tổng quan Kiến trúc Multimodal (FE05)"
+        },
+        {
+          "line_type": "unchanged",
+          "old_line_num": 4,
+          "new_line_num": 4,
+          "old_text": "Hệ thống xử lý tài liệu kỹ thuật trực quan gồm 2 phân hệ đã phát hành:",
+          "new_text": "Hệ thống xử lý tài liệu kỹ thuật trực quan gồm 2 phân hệ đã phát hành:"
+        },
+        {
+          "line_type": "unchanged",
+          "old_line_num": 5,
+          "new_line_num": 5,
+          "old_text": "- **FE05.1 OCR Engine:** `TechnicalAssetOcrEngine.extract_from_bytes()` trích xuất token từ sơ đồ và PDF.",
+          "new_text": "- **FE05.1 OCR Engine:** `TechnicalAssetOcrEngine.extract_from_bytes()` trích xuất token từ sơ đồ và PDF."
+        },
+        {
+          "line_type": "unchanged",
+          "old_line_num": 6,
+          "new_line_num": 6,
+          "old_text": "- **FE05.2 Vision-LLM Context Extractor:** `VisionContextExtractor.extract_context()` tái dựng đồ thị kiến trúc có hướng.",
+          "new_text": "- **FE05.2 Vision-LLM Context Extractor:** `VisionContextExtractor.extract_context()` tái dựng đồ thị kiến trúc có hướng."
+        },
+        {
+          "line_type": "unchanged",
+          "old_line_num": 7,
+          "new_line_num": 7,
+          "old_text": "",
+          "new_text": ""
+        },
+        {
+          "line_type": "unchanged",
+          "old_line_num": 8,
+          "new_line_num": 8,
+          "old_text": "## 2. Danh sách API Endpoints hiện hành",
+          "new_text": "## 2. Danh sách API Endpoints hiện hành"
+        },
+        {
+          "line_type": "unchanged",
+          "old_line_num": 9,
+          "new_line_num": 9,
+          "old_text": "- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ ảnh/PDF.",
+          "new_text": "- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ ảnh/PDF."
+        },
+        {
+          "line_type": "unchanged",
+          "old_line_num": 10,
+          "new_line_num": 10,
+          "old_text": "- `POST /api/v1/multimodal/extract-context`: Tái dựng đồ thị Nodes, Edges và Architectural Claims.",
+          "new_text": "- `POST /api/v1/multimodal/extract-context`: Tái dựng đồ thị Nodes, Edges và Architectural Claims."
+        },
+        {
+          "line_type": "added",
+          "old_line_num": null,
+          "new_line_num": 11,
+          "old_text": "",
+          "new_text": ""
+        },
+        {
+          "line_type": "added",
+          "old_line_num": null,
+          "new_line_num": 12,
+          "old_text": "",
+          "new_text": "## Cập nhật tự động (PR #42 (8c3d91a))"
+        },
+        {
+          "line_type": "added",
+          "old_line_num": null,
+          "new_line_num": 13,
+          "old_text": "",
+          "new_text": "- **Thành phần kiến trúc (Class):** `VisualAssetConsistencyVerifier`"
+        },
+        {
+          "line_type": "added",
+          "old_line_num": null,
+          "new_line_num": 14,
+          "old_text": "",
+          "new_text": "- **Hàm xử lý (Function):** `verify_consistency(file_bytes: bytes, filename: str, repo_path: str = '')`"
+        },
+        {
+          "line_type": "added",
+          "old_line_num": null,
+          "new_line_num": 15,
+          "old_text": "",
+          "new_text": "- **API Endpoint mới:** `POST /verify-consistency` — `@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)`"
+        },
+        {
+          "line_type": "added",
+          "old_line_num": null,
+          "new_line_num": 16,
+          "old_text": "",
+          "new_text": "- **Hàm xử lý (Function):** `verify_visual_code_consistency(file: UploadFile, repo_path: str = '')`"
+        }
+      ],
+      "added_lines": 6,
+      "removed_lines": 0,
+      "drift_resolved_count": 4
+    },
+    "version_history": [
+      {
+        "version_id": "ver_7f503e8a",
+        "version_number": "v1.0",
+        "content": "# Tài liệu Kỹ thuật: docs/architecture/multimodal_pipeline.md\n\n## 1. Tổng quan Kiến trúc Multimodal (FE05)\nHệ thống xử lý tài liệu kỹ thuật trực quan gồm 2 phân hệ đã phát hành:\n- **FE05.1 OCR Engine:** `TechnicalAssetOcrEngine.extract_from_bytes()` trích xuất token từ sơ đồ và PDF.\n- **FE05.2 Vision-LLM Context Extractor:** `VisionContextExtractor.extract_context()` tái dựng đồ thị kiến trúc có hướng.\n\n## 2. Danh sách API Endpoints hiện hành\n- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ ảnh/PDF.\n- `POST /api/v1/multimodal/extract-context`: Tái dựng đồ thị Nodes, Edges và Architectural Claims.",
+        "created_at": "2026-11-24 21:31:01 UTC",
+        "author": "initial_seed",
+        "trigger_ref": "baseline",
+        "status": "published",
+        "change_summary": "Phiên bản tài liệu gốc trước khi có thay đổi mã nguồn."
+      },
+      {
+        "version_id": "ver_eea197de",
+        "version_number": "v1.1-draft",
+        "content": "# Tài liệu Kỹ thuật: docs/architecture/multimodal_pipeline.md\n\n## 1. Tổng quan Kiến trúc Multimodal (FE05)\nHệ thống xử lý tài liệu kỹ thuật trực quan gồm 2 phân hệ đã phát hành:\n- **FE05.1 OCR Engine:** `TechnicalAssetOcrEngine.extract_from_bytes()` trích xuất token từ sơ đồ và PDF.\n- **FE05.2 Vision-LLM Context Extractor:** `VisionContextExtractor.extract_context()` tái dựng đồ thị kiến trúc có hướng.\n\n## 2. Danh sách API Endpoints hiện hành\n- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ ảnh/PDF.\n- `POST /api/v1/multimodal/extract-context`: Tái dựng đồ thị Nodes, Edges và Architectural Claims.\n\n## Cập nhật tự động (PR #42 (8c3d91a))\n- **Thành phần kiến trúc (Class):** `VisualAssetConsistencyVerifier`\n- **Hàm xử lý (Function):** `verify_consistency(file_bytes: bytes, filename: str, repo_path: str = '')`\n- **API Endpoint mới:** `POST /verify-consistency` — `@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)`\n- **Hàm xử lý (Function):** `verify_visual_code_consistency(file: UploadFile, repo_path: str = '')`",
+        "created_at": "2026-11-24 21:31:01 UTC",
+        "author": "ai_workflow",
+        "trigger_ref": "PR #42 (8c3d91a)",
+        "status": "draft",
+        "change_summary": "Đã tự động cập nhật 4 thành phần mới và gỡ 0 mục lỗi thời theo sự kiện PR #42 (8c3d91a)."
+      },
+      {
+        "version_id": "ver_6768448d",
+        "version_number": "v1.1-draft",
+        "content": "# Tài liệu Kỹ thuật: docs/architecture/multimodal_pipeline.md\n\n## 1. Tổng quan Kiến trúc Multimodal (FE05)\nHệ thống xử lý tài liệu kỹ thuật trực quan gồm 2 phân hệ đã phát hành:\n- **FE05.1 OCR Engine:** `TechnicalAssetOcrEngine.extract_from_bytes()` trích xuất token từ sơ đồ và PDF.\n- **FE05.2 Vision-LLM Context Extractor:** `VisionContextExtractor.extract_context()` tái dựng đồ thị kiến trúc có hướng.\n\n## 2. Danh sách API Endpoints hiện hành\n- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ ảnh/PDF.\n- `POST /api/v1/multimodal/extract-context`: Tái dựng đồ thị Nodes, Edges và Architectural Claims.\n\n## Cập nhật tự động (PR #42 (8c3d91a))\n- **Thành phần kiến trúc (Class):** `VisualAssetConsistencyVerifier`\n- **Hàm xử lý (Function):** `verify_consistency(file_bytes: bytes, filename: str, repo_path: str = '')`\n- **API Endpoint mới:** `POST /verify-consistency` — `@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)`\n- **Hàm xử lý (Function):** `verify_visual_code_consistency(file: UploadFile, repo_path: str = '')`",
+        "created_at": "2026-11-24 21:31:01 UTC",
+        "author": "ai_workflow",
+        "trigger_ref": "PR #42 (8c3d91a)",
+        "status": "draft",
+        "change_summary": "Đã tự động cập nhật 4 thành phần mới và gỡ 0 mục lỗi thời theo sự kiện PR #42 (8c3d91a)."
+      },
+      {
+        "version_id": "ver_d2d76dab",
+        "version_number": "v1.1-draft",
+        "content": "# Tài liệu Kỹ thuật: docs/architecture/multimodal_pipeline.md\n\n## 1. Tổng quan Kiến trúc Multimodal (FE05)\nHệ thống xử lý tài liệu kỹ thuật trực quan gồm 2 phân hệ đã phát hành:\n- **FE05.1 OCR Engine:** `TechnicalAssetOcrEngine.extract_from_bytes()` trích xuất token từ sơ đồ và PDF.\n- **FE05.2 Vision-LLM Context Extractor:** `VisionContextExtractor.extract_context()` tái dựng đồ thị kiến trúc có hướng.\n\n## 2. Danh sách API Endpoints hiện hành\n- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ ảnh/PDF.\n- `POST /api/v1/multimodal/extract-context`: Tái dựng đồ thị Nodes, Edges và Architectural Claims.\n\n## Cập nhật tự động (PR #42 (8c3d91a))\n- **Thành phần kiến trúc (Class):** `VisualAssetConsistencyVerifier`\n- **Hàm xử lý (Function):** `verify_consistency(file_bytes: bytes, filename: str, repo_path: str = '')`\n- **API Endpoint mới:** `POST /verify-consistency` — `@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)`\n- **Hàm xử lý (Function):** `verify_visual_code_consistency(file: UploadFile, repo_path: str = '')`",
+        "created_at": "2026-11-24 22:33:12 UTC",
+        "author": "ai_workflow",
+        "trigger_ref": "PR #42 (8c3d91a)",
+        "status": "draft",
+        "change_summary": "Đã tự động cập nhật 4 thành phần mới và gỡ 0 mục lỗi thời theo sự kiện PR #42 (8c3d91a)."
+      },
+      {
+        "version_id": "ver_e47ce47b",
+        "version_number": "v1.1-draft",
+        "content": "# Tài liệu Kỹ thuật: docs/architecture/multimodal_pipeline.md\n\n## 1. Tổng quan Kiến trúc Multimodal (FE05)\nHệ thống xử lý tài liệu kỹ thuật trực quan gồm 2 phân hệ đã phát hành:\n- **FE05.1 OCR Engine:** `TechnicalAssetOcrEngine.extract_from_bytes()` trích xuất token từ sơ đồ và PDF.\n- **FE05.2 Vision-LLM Context Extractor:** `VisionContextExtractor.extract_context()` tái dựng đồ thị kiến trúc có hướng.\n\n## 2. Danh sách API Endpoints hiện hành\n- `POST /api/v1/multimodal/ocr`: Trích xuất thực thể kỹ thuật từ ảnh/PDF.\n- `POST /api/v1/multimodal/extract-context`: Tái dựng đồ thị Nodes, Edges và Architectural Claims.\n\n## Cập nhật tự động (PR #42 (8c3d91a))\n- **Thành phần kiến trúc (Class):** `VisualAssetConsistencyVerifier`\n- **Hàm xử lý (Function):** `verify_consistency(file_bytes: bytes, filename: str, repo_path: str = '')`\n- **API Endpoint mới:** `POST /verify-consistency` — `@router.post('/verify-consistency', response_model=VisualCodeConsistencyResponse)`\n- **Hàm xử lý (Function):** `verify_visual_code_consistency(file: UploadFile, repo_path: str = '')`",
+        "created_at": "2026-11-24 22:33:12 UTC",
+        "author": "ai_workflow",
+        "trigger_ref": "PR #42 (8c3d91a)",
+        "status": "draft",
+        "change_summary": "Đã tự động cập nhật 4 thành phần mới và gỡ 0 mục lỗi thời theo sự kiện PR #42 (8c3d91a)."
+      }
+    ]
   }
 }

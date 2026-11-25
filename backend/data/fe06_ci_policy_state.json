@@ -1,0 +1,95 @@
+{
+  "policy": {
+    "mode": "block",
+    "block_on_severities": [
+      "high"
+    ],
+    "protected_paths": [
+      "backend/app/api/",
+      "backend/app/services/"
+    ],
+    "doc_paths": [
+      "docs/"
+    ],
+    "allow_override_label": "docs-drift-waived",
+    "updated_at": "2026-11-25T09:08:31.048239+00:00"
+  },
+  "runs": [
+    {
+      "run_id": "run-66e74b89",
+      "repo": "livingdocs/repo",
+      "pr_number": 105,
+      "base_sha": "HEAD~1",
+      "head_sha": "HEAD",
+      "policy_mode": "block",
+      "detected_severity": "critical",
+      "drift_detected": true,
+      "waived_by_label": false,
+      "decision": "allow",
+      "exit_code": 0,
+      "reason": "No policy-violating documentation drift detected.",
+      "affected_code_files": [
+        "backend/app/api/review_workflow.py"
+      ],
+      "missing_doc_updates": true,
+      "evaluated_at": "2026-11-25T09:16:47.391346+00:00"
+    },
+    {
+      "run_id": "run-5be5ed65",
+      "repo": "livingdocs/repo",
+      "pr_number": 102,
+      "base_sha": "HEAD~1",
+      "head_sha": "HEAD",
+      "policy_mode": "block",
+      "detected_severity": "critical",
+      "drift_detected": true,
+      "waived_by_label": true,
+      "decision": "allow",
+      "exit_code": 0,
+      "reason": "No policy-violating documentation drift detected.",
+      "affected_code_files": [
+        "backend/app/api/review_workflow.py"
+      ],
+      "missing_doc_updates": true,
+      "evaluated_at": "2026-11-25T09:12:03.409753+00:00"
+    },
+    {
+      "run_id": "run-19a05d49",
+      "repo": "livingdocs/repo",
+      "pr_number": 102,
+      "base_sha": "HEAD~1",
+      "head_sha": "HEAD",
+      "policy_mode": "block",
+      "detected_severity": "critical",
+      "drift_detected": true,
+      "waived_by_label": false,
+      "decision": "allow",
+      "exit_code": 0,
+      "reason": "No policy-violating documentation drift detected.",
+      "affected_code_files": [
+        "backend/app/api/review_workflow.py"
+      ],
+      "missing_doc_updates": true,
+      "evaluated_at": "2026-11-25T09:10:19.139496+00:00"
+    },
+    {
+      "run_id": "run-fe06-001",
+      "repo": "livingdocs/repo",
+      "pr_number": 48,
+      "base_sha": "abc1234",
+      "head_sha": "def5678",
+      "policy_mode": "block",
+      "detected_severity": "critical",
+      "drift_detected": true,
+      "waived_by_label": false,
+      "decision": "block",
+      "exit_code": 1,
+      "reason": "Critical documentation drift detected on protected code paths without matching docs/ changes.",
+      "affected_code_files": [
+        "backend/app/api/review_workflow.py"
+      ],
+      "missing_doc_updates": true,
+      "evaluated_at": "2026-11-25T09:02:02.691574+00:00"
+    }
+  ]
+}

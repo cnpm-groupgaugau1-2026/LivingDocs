@@ -944,3 +944,7 @@ app.include_router(grounding_diff.router)
 
 from app.api import review_workflow
 app.include_router(review_workflow.router)
+
+from app.api import ci_policy  # hoặc from backend.app.api import ci_policy tùy cấu trúc import hiện tại
+
+app.include_router(ci_policy.router)
