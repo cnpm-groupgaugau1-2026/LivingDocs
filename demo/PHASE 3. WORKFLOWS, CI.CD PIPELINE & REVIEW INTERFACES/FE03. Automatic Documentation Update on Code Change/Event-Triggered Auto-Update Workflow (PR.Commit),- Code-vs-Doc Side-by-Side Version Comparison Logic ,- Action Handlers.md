@@ -16,7 +16,7 @@
     - **Kết quả :** API trả về mã `200 OK` với JSON `AutoDocWorkflowResponse` chứa `workflow_id`, `engine_used`, `current_published_version` (`v1.0`), `active_draft_version` (`v1.1-draft`), mảng `side_by_side_diff` và `version_history`.
 - **Bước 2 — Kiểm thử sự kiện Pull Request (**`1. PR #42: Bổ sung FE05.3 Consistency Endpoint`**):**
     - Trên trang `http://localhost:3000/auto-doc-update`, quan sát kết quả mặc định của mẫu số 1 (hoặc bấm lại nút `1. PR #42`).
-- 
+- ![Demo Frontend](/docs/images/fe03-2.png)
     - **Kết quả :**
         - Hàng KPI hiển thị sự kiện `PR #42` (`feat/fe05-3-consistency • @minh-dev`), phiên bản hiện hành `v1.0`, bản nháp chờ duyệt `v1.1-draft` và `3 symbols` thay đổi được phát hiện.
         - Khung **Phân tích tác động sang tài liệu** liệt kê đầy đủ 3 mục bổ sung (`VisualAssetConsistencyVerifier`, `verify_consistency(...)`, `POST /verify-consistency`).
