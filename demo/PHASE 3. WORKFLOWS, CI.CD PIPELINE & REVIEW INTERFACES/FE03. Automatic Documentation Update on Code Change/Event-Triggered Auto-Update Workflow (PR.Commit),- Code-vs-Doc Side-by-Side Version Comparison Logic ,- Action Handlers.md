@@ -12,7 +12,7 @@
 
 - **Bước 1 — Kiểm tra Endpoint Backend trên Swagger UI (**`http://localhost:8000/docs`**):**
     - Mở nhóm `auto-doc-update` -\> chọn `POST /api/v1/auto-doc/trigger` -\> bấm **Try it out** -\> giữ nguyên payload mặc định và bấm **Execute**.
-- 
+- ![Demo Frontend](/docs/images/fe03-1.png)
     - **Kết quả :** API trả về mã `200 OK` với JSON `AutoDocWorkflowResponse` chứa `workflow_id`, `engine_used`, `current_published_version` (`v1.0`), `active_draft_version` (`v1.1-draft`), mảng `side_by_side_diff` và `version_history`.
 - **Bước 2 — Kiểm thử sự kiện Pull Request (**`1. PR #42: Bổ sung FE05.3 Consistency Endpoint`**):**
     - Trên trang `http://localhost:3000/auto-doc-update`, quan sát kết quả mặc định của mẫu số 1 (hoặc bấm lại nút `1. PR #42`).
