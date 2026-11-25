@@ -948,3 +948,7 @@ app.include_router(review_workflow.router)
 from app.api import ci_policy  # hoặc from backend.app.api import ci_policy tùy cấu trúc import hiện tại
 
 app.include_router(ci_policy.router)
+
+from app.api import version_audit
+
+app.include_router(version_audit.router)
