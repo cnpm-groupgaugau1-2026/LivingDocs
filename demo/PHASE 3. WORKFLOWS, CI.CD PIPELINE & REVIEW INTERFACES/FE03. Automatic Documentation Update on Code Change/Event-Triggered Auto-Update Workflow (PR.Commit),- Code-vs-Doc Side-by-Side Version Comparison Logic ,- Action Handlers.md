@@ -46,7 +46,7 @@
           ![Demo Frontend](/docs/images/fe03-07.png)
     - 
         - Bấm `✓ Accept Draft` -\> bản nháp `v1.1-draft` được nâng cấp thành phiên bản chính thức `v1.1`** (**`published`**)**.
-          ![Demo Frontend](/docs/images/fe03-8.png)
+          ![Demo Frontend](/docs/images/fe03-08.png)
     - 
         - Tại bảng **Lịch sử phiên bản tài liệu & Rollback** bên dưới, bấm `↺ Rollback về v1.0` -\> hệ thống tạo mốc `v1.2` khôi phục nguyên vẹn nội dung `v1.0` và ghi xuống tệp `backend/data/fe03_doc_workflows.json` (nhấn `F5` tải lại trang vẫn giữ nguyên lịch sử).
           ![Demo Frontend](/docs/images/fe03-9.png)
