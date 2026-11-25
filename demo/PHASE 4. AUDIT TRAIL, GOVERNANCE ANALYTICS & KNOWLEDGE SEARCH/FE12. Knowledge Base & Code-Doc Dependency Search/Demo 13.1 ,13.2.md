@@ -18,6 +18,6 @@
 - 
     - *Kết quả mong đợi:* Kết quả tìm kiếm cập nhật đúng theo từ khóa, chế độ và collection đã chọn; khung **13.1 RAG Retrieved Context** đồng bộ nội dung trích dẫn top kết quả.
 - **Bước 3 — Điều Hướng Hai Chiều Giữa Tài Liệu & Mã Nguồn (13.2):** Chọn một mục tài liệu `[DOC]` (ví dụ `FE06 CI/CD Pipeline & PR Merge Policy Runbook`) ở cột trái, xem danh sách liên kết hai chiều ở khung **13.2 Bidirectional Navigation**, sau đó bấm **Chuyển tới →** vào một thực thể mã nguồn `[CODE]` liên kết (ví dụ `ci_policy_service.py`).
-- ![Demo Frontend](/docs/images/d14.png)
+- ![Demo Frontend](/docs/images/fe12-3.png)
 - 
     - *Kết quả mong đợi:* Khung điều hướng chuyển sang chi tiết `[CODE] ci_policy_service.py` và hiển thị liên kết ngược trở lại `[DOC]` tương ứng để bấm quay lại hai chiều.
