@@ -50,4 +50,5 @@
     - 
         - Tại bảng **Lịch sử phiên bản tài liệu & Rollback** bên dưới, bấm `↺ Rollback về v1.0` -\> hệ thống tạo mốc `v1.2` khôi phục nguyên vẹn nội dung `v1.0` và ghi xuống tệp `backend/data/fe03_doc_workflows.json` (nhấn `F5` tải lại trang vẫn giữ nguyên lịch sử).
           ![Demo Frontend](/docs/images/fe03-09.png)
+          
           ![Demo Frontend](/docs/images/fe03-10.png)
