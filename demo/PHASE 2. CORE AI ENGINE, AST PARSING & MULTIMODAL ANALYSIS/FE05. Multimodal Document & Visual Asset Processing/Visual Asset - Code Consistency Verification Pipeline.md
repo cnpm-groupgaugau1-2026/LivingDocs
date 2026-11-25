@@ -16,7 +16,7 @@
 - **Bước 1 — Kiểm tra Endpoint Backend trên Swagger UI (**`http://localhost:8000/docs`**):**
     - Mở nhóm `multimodal` -\> chọn `POST /api/v1/multimodal/verify-consistency` -\> bấm **Try it out**.
     - Tải lên một tệp ảnh sơ đồ hoặc PDF bất kỳ (để trống `repo_path` để tự động quét `D:\CNPM\LivingDocs`) và bấm **Execute**.
-- 
+- ![Demo Frontend](/docs/images/fe05.png)
     - **Kết quả :** API trả về mã `200 OK` với JSON `VisualCodeConsistencyResponse` chứa `scanned_repo_root`, `scanned_files_count`, `indexed_symbols_count`, `consistency_score`, `overall_status` và mảng `verification_results` kèm `evidences` (`file_path`, `line_number`, `snippet`).
 - **Bước 2 — Kiểm thử đối chiếu mã nguồn thật (**`4. Kiến trúc LivingDocs Multimodal (Live Code)`**):**
     - Trên trang `http://localhost:3000/multimodal-demo`, quan sát kết quả mặc định của mẫu số 4 (`livingdocs_multimodal_pipeline.png`).
