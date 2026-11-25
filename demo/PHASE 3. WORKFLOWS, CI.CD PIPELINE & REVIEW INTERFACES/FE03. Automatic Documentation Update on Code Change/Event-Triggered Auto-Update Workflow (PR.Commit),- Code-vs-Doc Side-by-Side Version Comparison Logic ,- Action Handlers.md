@@ -43,7 +43,7 @@
           ![Demo Frontend](/docs/images/fe03-6.png)
     - 
         - Bấm `↻ Regenerate` -\> nhập chỉ dẫn bổ sung (ví dụ: *"Thêm ví dụ cURL"*) và bấm **Chạy Regenerate**.
-          ![Demo Frontend](/docs/images/fe03-7.png)
+          ![Demo Frontend](/docs/images/fe03-07.png)
     - 
         - Bấm `✓ Accept Draft` -\> bản nháp `v1.1-draft` được nâng cấp thành phiên bản chính thức `v1.1`** (**`published`**)**.
           ![Demo Frontend](/docs/images/fe03-8.png)
