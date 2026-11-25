@@ -14,7 +14,7 @@
 - 
     - *Kết quả mong đợi:* Trả về `200 OK` với danh sách kết quả kèm `score`, `keyword_score`, `semantic_score`, `rag_context`, và trang `/knowledge-search` hiển thị danh sách kết quả mặc định.
 - **Bước 2 — Đổi Chế Độ Tìm Kiếm & Lọc Collection (13.1):** Trên trang `/knowledge-search`, nhập từ khóa (ví dụ `rollback` hoặc `policy`), đổi chế độ từ `Hybrid` sang `Semantic Vector` hoặc `Keyword`, và chọn một `Collection` (ví dụ `ci-cd`, `audit`, `governance`).
-- ![Demo Frontend](/docs/images/d13.png)
+- ![Demo Frontend](/docs/images/fe12-2.png)
 - 
     - *Kết quả mong đợi:* Kết quả tìm kiếm cập nhật đúng theo từ khóa, chế độ và collection đã chọn; khung **13.1 RAG Retrieved Context** đồng bộ nội dung trích dẫn top kết quả.
 - **Bước 3 — Điều Hướng Hai Chiều Giữa Tài Liệu & Mã Nguồn (13.2):** Chọn một mục tài liệu `[DOC]` (ví dụ `FE06 CI/CD Pipeline & PR Merge Policy Runbook`) ở cột trái, xem danh sách liên kết hai chiều ở khung **13.2 Bidirectional Navigation**, sau đó bấm **Chuyển tới →** vào một thực thể mã nguồn `[CODE]` liên kết (ví dụ `ci_policy_service.py`).
